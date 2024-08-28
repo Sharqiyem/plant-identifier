@@ -27,10 +27,17 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "The app accesses your photos to identify plants.",
+          "cameraPermission": "The app accesses your camera to take photos of plants for identification."
+        }
+      ],
       "expo-router"
     ],
     "experiments": {
-      "typedRoutes": true
+      "typedRoutes": false
     }
   }
 }
