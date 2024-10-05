@@ -75,6 +75,7 @@ export const parseGeminiResponse = (response: string, languages: Language[]): { 
       }
     });
 
+    // console.log("🚀 ~ parseGeminiResponse ~ validatedResponse:", validatedResponse)
     return validatedResponse;
   } catch (error) {
     console.error('Error parsing Gemini response:', error);

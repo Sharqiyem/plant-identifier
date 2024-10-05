@@ -1,3 +1,8 @@
+export interface Language {
+  languageCode: string;
+  languageName: string;
+}
+
 export interface Plant {
   name: string;
   scientificName: string;
@@ -5,26 +10,11 @@ export interface Plant {
   description: string;
 }
 
-export interface ScanHistoryItem extends Plant {
+export interface PlantWithMeta extends Plant {
   timestamp: string;
   previewUri: string;
 }
 
-export interface LanguageMap {
-  [languageCode: string]: ScanHistoryItem;
-}
-
-export interface ScanHistoryEntry {
-  plants: LanguageMap;
-  timestamp: string;
-  previewUri: string;
-}
-
-export interface ScanHistory {
-  items: ScanHistoryEntry[];
-}
-
-export interface Language {
-  languageCode: string;
-  languageName: string;
+export interface ScanHistoryItem {
+  [languageCode: string]: PlantWithMeta;
 }

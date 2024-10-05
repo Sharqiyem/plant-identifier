@@ -1,5 +1,6 @@
 import { Plant } from '@/lib/types';
 import * as ImageManipulator from 'expo-image-manipulator';
+import { availableLanguages } from '../data/availableLanguages';
 
 function parseTextToPlant(text: string): Plant[] {
   const plants: Plant[] = [];
@@ -45,4 +46,10 @@ export const resizeImage = async (uri: string): Promise<string> => {
     { compress: 0.7, format: ImageManipulator.SaveFormat.JPEG }
   );
   return manipulatedImage.uri;
+};
+
+
+export const getLanguageName = (code: string): string => {
+  const language = availableLanguages.find(lang => lang.languageCode === code);
+  return language ? language.languageName : `Language ${code}`;
 };

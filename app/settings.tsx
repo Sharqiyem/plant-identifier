@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
+
 import Checkbox from 'expo-checkbox';
 import { Language } from '@/lib/types';
 import { loadSelectedLanguages, saveSelectedLanguages } from '@/lib/storage';
 import { availableLanguages } from '@/lib/data/availableLanguages';
 import { useLanguageStore } from '@/lib/store';
+import Colors from '@/constants/Colors';
 
 export default function Settings() {
   const { selectedLanguages, addLanguage, removeLanguage, loadLanguages, saveLanguages } =
@@ -52,7 +55,7 @@ export default function Settings() {
               onValueChange={() => toggleLanguage(language)}
               color={
                 selectedLanguages.some((lang) => lang.languageCode === language.languageCode)
-                  ? '#10B981'
+                  ? Colors.primary
                   : undefined
               }
               className="mr-4"
@@ -63,8 +66,9 @@ export default function Settings() {
       </ScrollView>
       <TouchableOpacity
         onPress={handleSaveLanguages}
-        className="bg-primary py-3 px-6 rounded-lg mt-4"
+        className="bg-primary py-3 px-6 rounded-lg mt-4 flex-row items-center justify-center"
       >
+        <Ionicons name="save-outline" size={24} color="white" style={{ marginRight: 8 }} />
         <Text className="text-primary-foreground text-center font-bold">Save</Text>
       </TouchableOpacity>
     </View>

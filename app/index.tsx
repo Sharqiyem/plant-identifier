@@ -1,24 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Image, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { View, Image, ActivityIndicator, TouchableOpacity, Text } from 'react-native';
 import Animated, { FadeIn, FadeOut, SlideInUp, SlideInDown } from 'react-native-reanimated';
 import { identifyPlant } from '@/lib/api';
 import { pickImage } from '@/lib/image';
-import { Language, Plant } from '@/lib/types';
+import { PlantWithMeta } from '@/lib/types';
 import { Button } from '@/components/Button';
 import { InfoSection } from '@/components/InfoSection';
 import { ResultModal } from '@/components/ResultModal';
 import { PlantCard } from '@/components/PlantCard';
-import { loadSelectedLanguages, saveScanToHistory } from '@/lib/storage';
+import { saveScanToHistory } from '@/lib/storage';
 import { useLanguageStore } from '@/lib/store';
+import Colors from '@/constants/Colors';
 
 const Home: React.FC = () => {
   const [image, setImage] = useState<string | null>(null);
   const [imageBase64, setImageBase64] = useState<string | null>(null);
   const [resizedImageUri, setResizedImageUri] = useState<string | null>(null);
-  const [plantInfo, setPlantInfo] = useState<Plant[]>([]);
   const [loading, setLoading] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const { selectedLanguages, loadLanguages } = useLanguageStore();
+  const [identifiedPlant, setIdentifiedPlant] = useState<{ [key: string]: PlantWithMeta } | null>(
+    null
+  );
 
   useEffect(() => {
     loadLanguages();
@@ -36,28 +40,30 @@ const Home: React.FC = () => {
 
   const identifyPlantFromImage = async (base64: string, previewUri: string) => {
     setLoading(true);
+    setError(null);
     try {
       const plantData = await identifyPlant(base64, selectedLanguages);
+      const timestamp = new Date().toISOString();
 
-      setPlantInfo(Object.values(plantData)); // if you want to display all languages
+      // Convert Plant to PlantWithMeta
+      const plantDataWithMeta: { [key: string]: PlantWithMeta } = Object.fromEntries(
+        Object.entries(plantData).map(([lang, plant]) => [
+          lang,
+          { ...plant, timestamp, previewUri }
+        ])
+      );
+
+      setIdentifiedPlant(plantDataWithMeta);
 
       try {
-        await saveScanToHistory(plantData, previewUri);
+        await saveScanToHistory(plantDataWithMeta, previewUri);
       } catch (saveError) {
         console.error('Error saving scan to history:', saveError);
-        // Optionally, you can show a user-friendly message here
-        // but continue with the flow as the plant was successfully identified
       }
     } catch (error) {
       console.error('Error identifying plant:', error);
-      setPlantInfo([
-        {
-          name: 'Error',
-          scientificName: '',
-          family: '',
-          description: 'Failed to identify plant. Please try again.'
-        }
-      ]);
+      setError('Failed to identify plant. Please try again.');
+      setIdentifiedPlant(null);
     } finally {
       setLoading(false);
     }
@@ -65,17 +71,13 @@ const Home: React.FC = () => {
 
   const handleRetry = () => {
     if (imageBase64 && resizedImageUri) {
-      setPlantInfo([]);
+      setIdentifiedPlant(null);
       identifyPlantFromImage(imageBase64, resizedImageUri);
     }
   };
 
   return (
     <View className="flex-1 bg-background p-4 py-8">
-      {/* <Animated.View entering={FadeIn.delay(50).duration(200)} exiting={FadeOut} className="mb-6">
-        <Text className="text-2xl font-bold text-center text-primary">Plant Identifier</Text>
-      </Animated.View> */}
-
       <Animated.View entering={SlideInUp.delay(100).duration(500)} className="flex-row gap-2 mb-4">
         <Button
           title="Gallery"
@@ -105,17 +107,32 @@ const Home: React.FC = () => {
 
       {image && !loading && (
         <Animated.View entering={FadeIn}>
-          <Button title="Retry" iconName="refresh" onPress={handleRetry} />
+          <Button
+            title="Retry"
+            iconName="refresh"
+            onPress={handleRetry}
+            className="bg-secondary text-secondary-foreground"
+          />
         </Animated.View>
       )}
 
-      {loading && <ActivityIndicator size="large" color="#10B981" />}
+      {loading && (
+        <View className="flex-1 items-center justify-center">
+          <ActivityIndicator size="large" color={Colors.primary} />
+        </View>
+      )}
 
-      {plantInfo?.length > 0 && !loading && (
+      {error && (
+        <Animated.View entering={FadeIn} className="mt-4">
+          <Text className="text-red-500 text-center">{error}</Text>
+        </Animated.View>
+      )}
+
+      {identifiedPlant && !loading && (
         <Animated.View entering={FadeIn.delay(300)} className="mt-4">
-          <TouchableOpacity onPress={() => setModalVisible(true)} className="pb-8 ">
-            <PlantCard plant={plantInfo[0]} />
-            <Text className="text-center text-primary mt-2">View all results</Text>
+          <TouchableOpacity onPress={() => setModalVisible(true)} className="pb-8">
+            <PlantCard plant={Object.values(identifiedPlant)[0]} />
+            <Text className="text-center text-primary mt-2 underline">View all results</Text>
           </TouchableOpacity>
         </Animated.View>
       )}
@@ -123,7 +140,8 @@ const Home: React.FC = () => {
       <ResultModal
         visible={modalVisible}
         onClose={() => setModalVisible(false)}
-        plantInfo={plantInfo}
+        plantInfo={identifiedPlant || {}}
+        languages={selectedLanguages}
       />
     </View>
   );

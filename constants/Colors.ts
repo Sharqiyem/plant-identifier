@@ -10,6 +10,11 @@ const Colors = {
   notification: 'hsl(352 100% 35%)',
   tintLight: '#2f95dc',
   tintDark: '#fff',
+  secondry: 'hsl(292 50% 60%)',
+  'secondry-foreground': 'hsl(242 90% 95%)',
+  accent: 'hsl(82 50% 60%)',
+  'accent-foreground': 'hsl(202 90% 95%)',
+  danger: 'hsl(0 91% 49%)',
 
 };
 
