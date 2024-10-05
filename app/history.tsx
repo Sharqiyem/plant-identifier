@@ -33,7 +33,7 @@ const History = () => {
   };
 
   const renderHistoryItem = ({ item }: { item: ScanHistoryItem }) => (
-    <View className={`flex-row mb-4`}>
+    <View className={`flex-row mb-4 bg-card`}>
       <Image source={{ uri: item.previewUri }} className={`w-20 h-20 rounded-lg mr-4`} />
       <View className="flex-1">
         <PlantCard plant={item} showTimestamp timestamp={item.timestamp} />
@@ -42,12 +42,12 @@ const History = () => {
   );
 
   return (
-    <View className="flex-1 bg-white p-4">
+    <View className="flex-1 bg-background p-4">
       <Stack.Screen
         options={{
           headerRight: () => (
             <Pressable className="p-2 px-3 rounded-full flex flex-row gap-1" onPress={cleanHistory}>
-              <Text className="text-sm">Clean History</Text>
+              <Text className="text-sm text-foreground">Clean History</Text>
             </Pressable>
           )
         }}

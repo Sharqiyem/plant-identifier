@@ -1,4 +1,4 @@
-import { Plant } from '../types';
+import { Plant } from '@/lib/types';
 import * as ImageManipulator from 'expo-image-manipulator';
 
 function parseTextToPlant(text: string): Plant[] {

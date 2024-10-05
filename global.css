@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ghost pokemon */
+@layer base {
+  :root {
+    --background: 262 35% 95%;
+    --foreground: 0 0% 15%;
+    --muted: 262 20% 80%;
+    --muted-foreground: 262 20% 25%;
+    --popover: 262 36% 96%;
+    --popover-foreground: 0 0% 14%;
+    --card: 262 34% 94%;
+    --card-foreground: 0 0% 16%;
+    --border: 262 20% 90%;
+    --input: 262 20% 80%;
+    --primary: 262 50% 60%;
+    --primary-foreground: 262 90% 95%;
+    --secondary: 242 50% 60%;
+    --secondary-foreground: 242 90% 95%;
+    --accent: 202 60% 60%;
+    --accent-foreground: 202 90% 95%;
+    --destructive: 352 100% 40%;
+    --destructive-foreground: 352 100% 95%;
+    --ring: 262 50% 50%;
+    --radius: 0.5rem;
+    --danger: 0 91% 49%;
+  }
+
+  .dark:root {
+    --background: 262 35% 10%;
+    --foreground: 0 0% 80%;
+    --muted: 262 20% 25%;
+    --muted-foreground: 262 20% 80%;
+    --popover: 262 35% 9%;
+    --popover-foreground: 0 0% 81%;
+    --card: 262 35% 11%;
+    --card-foreground: 0 0% 79%;
+    --border: 262 20% 20%;
+    --input: 262 20% 30%;
+    --primary: 262 50% 55%;
+    --primary-foreground: 262 90% 95%;
+    --secondary: 242 50% 55%;
+    --secondary-foreground: 242 90% 95%;
+    --accent: 202 60% 55%;
+    --accent-foreground: 202 90% 95%;
+    --destructive: 352 100% 35%;
+    --destructive-foreground: 352 100% 95%;
+    --ring: 262 50% 50%;
+    --danger: 0 91% 49%;
+  }
+}
