@@ -21,6 +21,7 @@ export const Button: React.FC<ButtonProps> = ({
   ...props
 }) => (
   <TouchableOpacity
+    testID="button"
     className={twMerge(
       'bg-primary rounded-lg px-6 py-3 flex-row justify-center items-center',
       className
@@ -29,7 +30,7 @@ export const Button: React.FC<ButtonProps> = ({
     disabled={disabled}
     {...props}
   >
-    <Ionicons name={iconName} size={22} color={Colors.text} />
+    <Ionicons testID="icon" name={iconName} size={22} color={Colors.text} />
     <Text className="text-foreground font-bold ml-2">{title}</Text>
   </TouchableOpacity>
 );

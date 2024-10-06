@@ -1,0 +1,119 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PlantCard renders match with snapshot 1`] = `
+<View
+  style={
+    [
+      {
+        "backgroundColor": "hsl(262, 35%, 11%)",
+      },
+      {
+        "paddingBottom": 16,
+        "paddingTop": 16,
+      },
+      {
+        "borderBottomLeftRadius": 8,
+        "borderBottomRightRadius": 8,
+        "borderTopLeftRadius": 8,
+        "borderTopRightRadius": 8,
+      },
+      {
+        "marginBottom": 16,
+      },
+      {
+        "shadowColor": "rgba(0, 0, 0, 0.1)",
+        "shadowOffset": {
+          "height": 10,
+          "width": 0,
+        },
+        "shadowOpacity": 1,
+        "shadowRadius": 15,
+      },
+      {
+        "shadowColor": "rgba(0, 0, 0, 0.1)",
+        "shadowOffset": {
+          "height": 10,
+          "width": 0,
+        },
+        "shadowOpacity": 1,
+        "shadowRadius": 15,
+      },
+      {
+        "shadowColor": "rgba(0, 0, 0, 0.5)",
+      },
+    ]
+  }
+>
+  <Text
+    style={
+      [
+        {
+          "color": "hsl(0, 0%, 79%)",
+        },
+        {
+          "fontSize": 24,
+          "lineHeight": 32,
+        },
+        {
+          "fontWeight": "700",
+        },
+        {
+          "marginBottom": 8,
+        },
+      ]
+    }
+    testID="plant-name"
+  >
+    Name: 
+    Mock Plant
+  </Text>
+  <Text
+    style={
+      [
+        {
+          "color": "hsl(262, 20%, 80%)",
+        },
+        {
+          "marginBottom": 4,
+        },
+      ]
+    }
+    testID="plant-scientific-name"
+  >
+    Scientific Name: 
+    Mockus plantus
+  </Text>
+  <Text
+    style={
+      [
+        {
+          "color": "hsl(262, 20%, 80%)",
+        },
+        {
+          "marginBottom": 4,
+        },
+      ]
+    }
+    testID="plant-family"
+  >
+    Family: 
+    Mockaceae
+  </Text>
+  <Text
+    numberOfLines={3}
+    style={
+      [
+        {
+          "color": "hsl(0, 0%, 80%)",
+        },
+        {
+          "marginBottom": 8,
+        },
+      ]
+    }
+    testID="plant-description"
+  >
+    This is a mock plant for testing purposes.
+  </Text>
+</View>
+`;

@@ -1,0 +1,106 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InfoSection renders correctly 1`] = `
+<View
+  style={
+    [
+      {
+        "paddingBottom": 16,
+        "paddingLeft": 16,
+        "paddingRight": 16,
+        "paddingTop": 16,
+      },
+      {
+        "backgroundColor": "hsl(262, 35%, 11%)",
+      },
+      {
+        "borderBottomLeftRadius": 8,
+        "borderBottomRightRadius": 8,
+        "borderTopLeftRadius": 8,
+        "borderTopRightRadius": 8,
+      },
+      {
+        "shadowColor": "rgba(0, 0, 0, 0.1)",
+        "shadowOffset": {
+          "height": 6,
+          "width": 0,
+        },
+        "shadowOpacity": 1,
+        "shadowRadius": 10,
+      },
+      {
+        "shadowColor": "rgba(0, 0, 0, 0.1)",
+        "shadowOffset": {
+          "height": 6,
+          "width": 0,
+        },
+        "shadowOpacity": 1,
+        "shadowRadius": 10,
+      },
+    ]
+  }
+>
+  <View
+    style={
+      [
+        {
+          "flexDirection": "row",
+        },
+        {
+          "alignItems": "center",
+        },
+        {
+          "justifyContent": "center",
+        },
+        {
+          "marginBottom": 12,
+        },
+      ]
+    }
+  >
+    <Text />
+    <Text
+      style={
+        [
+          {
+            "marginLeft": 8,
+          },
+          {
+            "fontSize": 18,
+            "lineHeight": 28,
+          },
+          {
+            "fontWeight": "600",
+          },
+          {
+            "color": "hsl(262, 50%, 55%)",
+          },
+        ]
+      }
+    >
+      How to Use
+    </Text>
+  </View>
+  <Text
+    style={
+      [
+        {
+          "textAlign": "center",
+        },
+        {
+          "fontSize": 16,
+          "lineHeight": 24,
+        },
+        {
+          "color": "hsl(0, 0%, 80%)",
+        },
+        {
+          "lineHeight": 24,
+        },
+      ]
+    }
+  >
+    To identify plants, select an image from your gallery or take a photo using the camera. Our AI will analyze the image and provide detailed information about the plant.
+  </Text>
+</View>
+`;

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Modal, FlatList, SafeAreaView, Image } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
 import { PlantWithMeta, Language } from '@/types';
 import { PlantCard } from '@/components/common/PlantCard';
 import { Ionicons } from '@expo/vector-icons';
@@ -33,6 +32,7 @@ export const ResultModal: React.FC<ResultModalProps> = ({
               Plant Identification Results
             </Text>
             <TouchableOpacity
+              testID="close-button"
               onPress={onClose}
               className="rounded-full p-2 bg-primary "
               accessibilityLabel="Close modal"
@@ -43,28 +43,16 @@ export const ResultModal: React.FC<ResultModalProps> = ({
           </View>
 
           {previewUri && (
-            <Image source={{ uri: previewUri }} className="w-full h-48 object-cover" />
+            <Image
+              testID="plant-image"
+              source={{ uri: previewUri }}
+              className="w-full h-48 object-cover"
+            />
           )}
-
-          {/* <View className="px-4 py-2">
-            <Picker
-              selectedValue={selectedLanguage}
-              onValueChange={(itemValue) => setSelectedLanguage(itemValue)}
-              style={{ color: '#10B981' }} // Adjust color as needed
-            >
-              {languages.map((lang) => (
-                <Picker.Item
-                  key={lang.languageCode}
-                  label={lang.languageName}
-                  value={lang.languageCode}
-                />
-              ))}
-            </Picker>
-          </View> */}
 
           {plantInfo[selectedLanguage] && (
             <View className="px-4">
-              <PlantCard plant={plantInfo[selectedLanguage]} />
+              <PlantCard testID="plant-card" plant={plantInfo[selectedLanguage]} />
             </View>
           )}
 
@@ -77,7 +65,7 @@ export const ResultModal: React.FC<ResultModalProps> = ({
                 <Text className="text-lg font-semibold text-accent mb-2">
                   {languages.find((lang) => lang.languageCode === item)?.languageName || item}
                 </Text>
-                <PlantCard plant={plantInfo[item]} />
+                <PlantCard testID="plant-card" plant={plantInfo[item]} />
               </View>
             )}
             keyExtractor={(item) => item}

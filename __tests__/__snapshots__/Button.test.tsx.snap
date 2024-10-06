@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button renders match with snapshot 1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    {
+      "alignItems": "center",
+      "backgroundColor": "hsl(262, 50%, 55%)",
+      "borderBottomLeftRadius": 8,
+      "borderBottomRightRadius": 8,
+      "borderTopLeftRadius": 8,
+      "borderTopRightRadius": 8,
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "opacity": 1,
+      "paddingBottom": 12,
+      "paddingLeft": 24,
+      "paddingRight": 24,
+      "paddingTop": 12,
+    }
+  }
+  testID="button"
+>
+  <Ionicons
+    color="#000000"
+    name="add"
+    size={22}
+    testID="icon"
+  />
+  <Text
+    style={
+      [
+        {
+          "color": "hsl(0, 0%, 80%)",
+        },
+        {
+          "fontWeight": "700",
+        },
+        {
+          "marginLeft": 8,
+        },
+      ]
+    }
+  >
+    Test Button
+  </Text>
+</View>
+`;

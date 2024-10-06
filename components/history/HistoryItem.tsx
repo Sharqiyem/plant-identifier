@@ -128,7 +128,7 @@ const HistoryItem = React.memo(
           exiting={SlideOutDown.duration(500)}
           style={{ width: SCREEN_WIDTH, marginBottom: 16 }}
         >
-          <GestureDetector gesture={composedGestures}>
+          <GestureDetector testID="history-item-gesture" gesture={composedGestures}>
             <Animated.View
               className="bg-red-500"
               style={[
@@ -138,17 +138,24 @@ const HistoryItem = React.memo(
             >
               <Animated.View style={{ width: SCREEN_WIDTH - Math.abs(SWIPE_THRESHOLD / 2) }}>
                 <AnimatedTouchableOpacity
+                  testID="history-item-touchable"
                   animatedProps={animatedCardProps}
                   className="bg-card rounded-lg overflow-hidden"
                   onPress={() => onPress(item)}
                   activeOpacity={0.9}
                 >
                   <Image
+                    testID="plant-image"
                     source={{ uri: plantInfo.previewUri }}
                     className="w-full h-40 object-cover"
                   />
                   <View className="p-4">
-                    <PlantCard plant={plantInfo} showTimestamp timestamp={plantInfo.timestamp} />
+                    <PlantCard
+                      testID="plant-card"
+                      plant={plantInfo}
+                      showTimestamp
+                      timestamp={plantInfo.timestamp}
+                    />
                   </View>
                 </AnimatedTouchableOpacity>
               </Animated.View>
@@ -162,7 +169,11 @@ const HistoryItem = React.memo(
                   }
                 ]}
               >
-                <TouchableOpacity onPress={handleDelete} className="p-4 rounded-lg">
+                <TouchableOpacity
+                  testID="delete-button"
+                  onPress={handleDelete}
+                  className="p-4 rounded-lg"
+                >
                   <Ionicons name="trash-outline" size={24} color="white" />
                 </TouchableOpacity>
               </Animated.View>
@@ -186,7 +197,11 @@ const HistoryItem = React.memo(
             rCloseButtonStyle
           ]}
         >
-          <AnimatedTouchableOpacity animatedProps={animatedCloseButtonProps} onPress={handleDelete}>
+          <AnimatedTouchableOpacity
+            testID="corner-delete-button"
+            animatedProps={animatedCloseButtonProps}
+            onPress={handleDelete}
+          >
             <Ionicons name="close" size={20} color="white" />
           </AnimatedTouchableOpacity>
         </Animated.View>

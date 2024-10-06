@@ -1,0 +1,381 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ResultModal matches snapshot 1`] = `
+<Modal
+  animationType="slide"
+  hardwareAccelerated={false}
+  onRequestClose={
+    [MockFunction] {
+      "calls": [
+        [],
+      ],
+      "results": [
+        {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
+  transparent={true}
+  visible={true}
+>
+  <RCTSafeAreaView
+    style={
+      [
+        {
+          "flexBasis": "0%",
+          "flexGrow": 1,
+          "flexShrink": 1,
+        },
+        {
+          "backgroundColor": "rgba(0, 0, 0, 0.7)",
+        },
+      ]
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "flexBasis": "0%",
+            "flexGrow": 1,
+            "flexShrink": 1,
+          },
+          {
+            "marginBottom": 16,
+            "marginLeft": 16,
+            "marginRight": 16,
+            "marginTop": 16,
+          },
+          {
+            "backgroundColor": "hsl(262, 35%, 11%)",
+          },
+          {
+            "borderBottomLeftRadius": 8,
+            "borderBottomRightRadius": 8,
+            "borderTopLeftRadius": 8,
+            "borderTopRightRadius": 8,
+          },
+          {
+            "overflow": "hidden",
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          [
+            {
+              "flexDirection": "row",
+            },
+            {
+              "justifyContent": "space-between",
+            },
+            {
+              "alignItems": "center",
+            },
+            {
+              "paddingBottom": 16,
+              "paddingLeft": 16,
+              "paddingRight": 16,
+              "paddingTop": 16,
+            },
+            {
+              "borderBottomWidth": 1,
+            },
+            {
+              "borderBottomColor": "hsl(262, 20%, 20%)",
+              "borderLeftColor": "hsl(262, 20%, 20%)",
+              "borderRightColor": "hsl(262, 20%, 20%)",
+              "borderTopColor": "hsl(262, 20%, 20%)",
+            },
+          ]
+        }
+      >
+        <Text
+          style={
+            [
+              {
+                "fontSize": 24,
+                "lineHeight": 32,
+              },
+              {
+                "fontWeight": "700",
+              },
+              {
+                "color": "hsl(0, 0%, 79%)",
+              },
+            ]
+          }
+        >
+          Plant Identification Results
+        </Text>
+        <View
+          accessibilityLabel="Close modal"
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          hitSlop={
+            {
+              "bottom": 10,
+              "left": 10,
+              "right": 10,
+              "top": 10,
+            }
+          }
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            {
+              "backgroundColor": "hsl(262, 50%, 55%)",
+              "borderBottomLeftRadius": 9999,
+              "borderBottomRightRadius": 9999,
+              "borderTopLeftRadius": 9999,
+              "borderTopRightRadius": 9999,
+              "opacity": 1,
+              "paddingBottom": 8,
+              "paddingLeft": 8,
+              "paddingRight": 8,
+              "paddingTop": 8,
+            }
+          }
+          testID="close-button"
+        >
+          <Ionicons
+            color="#000000"
+            name="close"
+            size={24}
+          />
+        </View>
+      </View>
+      <Image
+        source={
+          {
+            "uri": "https://example.com/plant.jpg",
+          }
+        }
+        style={
+          [
+            {
+              "width": "100%",
+            },
+            {
+              "height": 192,
+            },
+          ]
+        }
+        testID="plant-image"
+      />
+      <View
+        style={
+          [
+            {
+              "paddingLeft": 16,
+              "paddingRight": 16,
+            },
+          ]
+        }
+      >
+        <PlantCard
+          plant={
+            {
+              "description": "This is an English plant.",
+              "family": "Plantaceae",
+              "name": "English Plant",
+              "previewUri": "https://example.com/plant.jpg",
+              "scientificName": "Plantus Englishus",
+              "timestamp": "2023-05-20T12:00:00Z",
+            }
+          }
+          testID="plant-card"
+        />
+      </View>
+      <Text
+        style={
+          [
+            {
+              "fontSize": 18,
+              "lineHeight": 28,
+            },
+            {
+              "fontWeight": "600",
+            },
+            {
+              "color": "hsl(262, 50%, 55%)",
+            },
+            {
+              "marginTop": 16,
+            },
+            {
+              "marginBottom": 8,
+            },
+            {
+              "paddingLeft": 16,
+              "paddingRight": 16,
+            },
+          ]
+        }
+      >
+        All Languages
+      </Text>
+      <RCTScrollView
+        data={
+          [
+            "en",
+            "es",
+          ]
+        }
+        getItem={[Function]}
+        getItemCount={[Function]}
+        keyExtractor={[Function]}
+        onContentSizeChange={[Function]}
+        onLayout={[Function]}
+        onMomentumScrollBegin={[Function]}
+        onMomentumScrollEnd={[Function]}
+        onScroll={[Function]}
+        onScrollBeginDrag={[Function]}
+        onScrollEndDrag={[Function]}
+        removeClippedSubviews={false}
+        renderItem={[Function]}
+        scrollEventThrottle={0.0001}
+        stickyHeaderIndices={[]}
+        viewabilityConfigCallbackPairs={[]}
+      >
+        <View>
+          <View
+            onFocusCapture={[Function]}
+            onLayout={[Function]}
+            style={null}
+          >
+            <View
+              style={
+                [
+                  {
+                    "marginBottom": 24,
+                  },
+                  {
+                    "paddingLeft": 16,
+                    "paddingRight": 16,
+                  },
+                ]
+              }
+            >
+              <Text
+                style={
+                  [
+                    {
+                      "fontSize": 18,
+                      "lineHeight": 28,
+                    },
+                    {
+                      "fontWeight": "600",
+                    },
+                    {
+                      "color": "hsl(82, 50%, 60%)",
+                    },
+                    {
+                      "marginBottom": 8,
+                    },
+                  ]
+                }
+              >
+                English
+              </Text>
+              <PlantCard
+                plant={
+                  {
+                    "description": "This is an English plant.",
+                    "family": "Plantaceae",
+                    "name": "English Plant",
+                    "previewUri": "https://example.com/plant.jpg",
+                    "scientificName": "Plantus Englishus",
+                    "timestamp": "2023-05-20T12:00:00Z",
+                  }
+                }
+                testID="plant-card"
+              />
+            </View>
+          </View>
+          <View
+            onFocusCapture={[Function]}
+            onLayout={[Function]}
+            style={null}
+          >
+            <View
+              style={
+                [
+                  {
+                    "marginBottom": 24,
+                  },
+                  {
+                    "paddingLeft": 16,
+                    "paddingRight": 16,
+                  },
+                ]
+              }
+            >
+              <Text
+                style={
+                  [
+                    {
+                      "fontSize": 18,
+                      "lineHeight": 28,
+                    },
+                    {
+                      "fontWeight": "600",
+                    },
+                    {
+                      "color": "hsl(82, 50%, 60%)",
+                    },
+                    {
+                      "marginBottom": 8,
+                    },
+                  ]
+                }
+              >
+                Spanish
+              </Text>
+              <PlantCard
+                plant={
+                  {
+                    "description": "Esta es una planta española.",
+                    "family": "Plantaceae",
+                    "name": "Planta Española",
+                    "previewUri": "https://example.com/plant.jpg",
+                    "scientificName": "Plantus Espanolus",
+                    "timestamp": "2023-05-20T12:00:00Z",
+                  }
+                }
+                testID="plant-card"
+              />
+            </View>
+          </View>
+        </View>
+      </RCTScrollView>
+    </View>
+  </RCTSafeAreaView>
+</Modal>
+`;
