@@ -10,7 +10,8 @@ import Animated, {
   runOnJS,
   interpolate,
   Extrapolate,
-  useAnimatedGestureHandler
+  useAnimatedGestureHandler,
+  FadeIn
 } from 'react-native-reanimated';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { Ionicons } from '@expo/vector-icons';
@@ -103,15 +104,17 @@ const History = () => {
           )
         }}
       />
-      <Animated.FlatList
-        showsVerticalScrollIndicator={false}
-        data={history}
-        renderItem={renderItem}
-        keyExtractor={(item, index) => index.toString()}
-        contentContainerStyle={{ padding: 16 }}
-        removeClippedSubviews={false}
-        scrollEventThrottle={16}
-      />
+      <Animated.View style={{ flex: 1 }}>
+        <Animated.FlatList
+          showsVerticalScrollIndicator={false}
+          data={history}
+          renderItem={renderItem}
+          keyExtractor={(item, index) => index.toString()}
+          contentContainerStyle={{ padding: 16 }}
+          removeClippedSubviews={false}
+          scrollEventThrottle={16}
+        />
+      </Animated.View>
       {selectedItem && (
         <ResultModal
           visible={modalVisible}

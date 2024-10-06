@@ -96,8 +96,8 @@ const Home: React.FC = () => {
       </Animated.View>
 
       {image ? (
-        <Animated.View entering={FadeIn}>
-          <Image source={{ uri: image }} className="w-full h-64 rounded-lg mb-4" />
+        <Animated.View entering={FadeIn} className="w-full h-64 mb-4 overflow-hidden rounded-lg">
+          <Image source={{ uri: image }} className="w-full h-full" resizeMode="cover" />
         </Animated.View>
       ) : (
         <Animated.View className="flex-1 mt-8" entering={SlideInDown.delay(200).duration(500)}>

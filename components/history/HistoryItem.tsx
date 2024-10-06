@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { View, Image, TouchableOpacity, Dimensions } from 'react-native';
+import { View, Image, TouchableOpacity, Dimensions, Text } from 'react-native';
 import Animated, {
   SlideInDown,
   SlideOutDown,
@@ -10,7 +10,8 @@ import Animated, {
   interpolate,
   clamp,
   useAnimatedProps,
-  interpolateColor
+  interpolateColor,
+  FadeInRight
 } from 'react-native-reanimated';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { Ionicons } from '@expo/vector-icons';
@@ -23,8 +24,8 @@ const AnimatedTouchableOpacity = Animated.createAnimatedComponent(TouchableOpaci
 const SWIPE_THRESHOLD = -75;
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
-const dangerColor = hslStringToRgb(Colors.danger); // 'hsl(0 91% 49%)'
-const cardColor = hslStringToRgb(Colors.card); // 'hsl(262 35% 11%)'
+const dangerColor = hslStringToRgb(Colors.danger);
+const cardColor = hslStringToRgb(Colors.card);
 
 const HistoryItem = React.memo(
   ({
@@ -75,17 +76,13 @@ const HistoryItem = React.memo(
       };
     });
 
-    const animatedCloseButtonProps = useAnimatedProps(() => {
-      return {
-        pointerEvents: translateX.value < SWIPE_THRESHOLD / 2 ? 'none' : ('auto' as const)
-      };
-    });
+    const animatedCloseButtonProps = useAnimatedProps(() => ({
+      pointerEvents: translateX.value < SWIPE_THRESHOLD / 2 ? 'none' : 'auto'
+    }));
 
-    const animatedCardProps = useAnimatedProps(() => {
-      return {
-        pointerEvents: translateX.value < SWIPE_THRESHOLD / 2 ? 'none' : ('auto' as const)
-      };
-    });
+    const animatedCardProps = useAnimatedProps(() => ({
+      pointerEvents: translateX.value < SWIPE_THRESHOLD / 2 ? 'none' : 'auto'
+    }));
 
     const panGesture = Gesture.Pan()
       .activeOffsetX([-10, 10])
@@ -124,13 +121,14 @@ const HistoryItem = React.memo(
 
     return (
       <View className="mb-4" style={{ width: SCREEN_WIDTH }}>
-        <GestureDetector gesture={composedGestures}>
-          <Animated.View
-            entering={SlideInDown.delay(index * 100)
-              .duration(500)
-              .springify()}
-            exiting={SlideOutDown.duration(500).springify()}
-          >
+        <Animated.View
+          entering={SlideInDown.delay(index * 50)
+            .duration(100)
+            .springify()}
+          exiting={SlideOutDown.duration(500)}
+          style={{ width: SCREEN_WIDTH, marginBottom: 16 }}
+        >
+          <GestureDetector gesture={composedGestures}>
             <Animated.View
               className="bg-red-500"
               style={[
@@ -138,21 +136,22 @@ const HistoryItem = React.memo(
                 rStyle
               ]}
             >
-              <AnimatedTouchableOpacity
-                animatedProps={animatedCardProps}
-                className="bg-card rounded-lg overflow-hidden"
-                style={{ width: SCREEN_WIDTH - Math.abs(SWIPE_THRESHOLD / 2) }}
-                onPress={() => onPress(item)}
-                activeOpacity={0.9}
-              >
-                <Image
-                  source={{ uri: plantInfo.previewUri }}
-                  className="w-full h-40 object-cover"
-                />
-                <View className="p-4">
-                  <PlantCard plant={plantInfo} showTimestamp timestamp={plantInfo.timestamp} />
-                </View>
-              </AnimatedTouchableOpacity>
+              <Animated.View style={{ width: SCREEN_WIDTH - Math.abs(SWIPE_THRESHOLD / 2) }}>
+                <AnimatedTouchableOpacity
+                  animatedProps={animatedCardProps}
+                  className="bg-card rounded-lg overflow-hidden"
+                  onPress={() => onPress(item)}
+                  activeOpacity={0.9}
+                >
+                  <Image
+                    source={{ uri: plantInfo.previewUri }}
+                    className="w-full h-40 object-cover"
+                  />
+                  <View className="p-4">
+                    <PlantCard plant={plantInfo} showTimestamp timestamp={plantInfo.timestamp} />
+                  </View>
+                </AnimatedTouchableOpacity>
+              </Animated.View>
               <Animated.View
                 style={[
                   rDeleteButtonStyle,
@@ -163,15 +162,16 @@ const HistoryItem = React.memo(
                   }
                 ]}
               >
-                <TouchableOpacity onPress={handleDelete} className=" p-4 rounded-lg">
+                <TouchableOpacity onPress={handleDelete} className="p-4 rounded-lg">
                   <Ionicons name="trash-outline" size={24} color="white" />
                 </TouchableOpacity>
               </Animated.View>
             </Animated.View>
-          </Animated.View>
-        </GestureDetector>
-        <AnimatedTouchableOpacity
-          animatedProps={animatedCloseButtonProps}
+          </GestureDetector>
+        </Animated.View>
+
+        <Animated.View
+          entering={FadeInRight.delay(index * 1000).duration(500)}
           style={[
             {
               position: 'absolute',
@@ -185,10 +185,11 @@ const HistoryItem = React.memo(
             },
             rCloseButtonStyle
           ]}
-          onPress={handleDelete}
         >
-          <Ionicons name="close" size={20} color="white" />
-        </AnimatedTouchableOpacity>
+          <AnimatedTouchableOpacity animatedProps={animatedCloseButtonProps} onPress={handleDelete}>
+            <Ionicons name="close" size={20} color="white" />
+          </AnimatedTouchableOpacity>
+        </Animated.View>
       </View>
     );
   }

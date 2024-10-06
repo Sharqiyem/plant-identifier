@@ -1,6 +1,6 @@
 import { Plant } from '@/types';
 import * as ImageManipulator from 'expo-image-manipulator';
-import { availableLanguages } from '../data/availableLanguages';
+import { availableLanguages } from '../data/languages';
 
 function parseTextToPlant(text: string): Plant[] {
   const plants: Plant[] = [];
