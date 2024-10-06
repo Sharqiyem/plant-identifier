@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Platform } from 'react-native';
 import { Plant } from '@/lib/types';
 
 interface PlantCardProps {
@@ -13,8 +13,13 @@ export const PlantCard: React.FC<PlantCardProps> = ({
   showTimestamp = false,
   timestamp
 }) => {
+  const shadowStyle = Platform.select({
+    ios: 'shadow-lg shadow-black/50',
+    android: 'elevation-4'
+  });
+
   return (
-    <View className="bg-card p-4 rounded-lg mb-4">
+    <View className={`bg-card py-4 rounded-lg mb-4 ${shadowStyle}`}>
       <Text className="text-card-foreground text-2xl font-bold mb-2">Name: {plant.name}</Text>
       <Text className="text-muted-foreground mb-1">Scientific Name: {plant.scientificName}</Text>
       <Text className="text-muted-foreground mb-1">Family: {plant.family}</Text>

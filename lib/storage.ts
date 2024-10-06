@@ -70,3 +70,16 @@ export const clearScanHistory = async (): Promise<void> => {
         console.error('Error clearing scan history:', error);
     }
 };
+
+export const removeScanHistoryItem = async (index: number): Promise<void> => {
+    try {
+        const historyJson = await AsyncStorage.getItem('scanHistory');
+        if (historyJson) {
+            const history: ScanHistoryItem[] = JSON.parse(historyJson);
+            history.splice(index, 1);
+            await AsyncStorage.setItem('scanHistory', JSON.stringify(history));
+        }
+    } catch (error) {
+        console.error('Error removing scan history item:', error);
+    }
+};
