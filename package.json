@@ -10,7 +10,9 @@
     "test": "jest --watchAll",
     "test:coverage": "jest --coverage --coverageReporters=\"text\" --coverageReporters=\"text-summary\"",
     "format": "prettier . --write",
-    "build:tailwind": "tailwindcss --config tailwind.config.js -i ./styles/globals.css -o ./styles/output.css"
+    "build:tailwind": "tailwindcss --config tailwind.config.js -i ./styles/globals.css -o ./styles/output.css",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@expo/vector-icons": "^14.0.2",
@@ -52,8 +54,12 @@
     "@types/jest": "^29.5.13",
     "@types/react": "~18.2.45",
     "@types/react-test-renderer": "^18.3.0",
+    "eslint": "^8.57.0",
+    "eslint-config-expo": "^7.1.2",
+    "husky": "^9.1.6",
     "jest": "^29.7.0",
     "jest-expo": "^51.0.4",
+    "lint-staged": "^15.2.10",
     "react-test-renderer": "18.2.0",
     "tailwindcss": "3.3.2",
     "typescript": "~5.3.3"
@@ -78,6 +84,17 @@
     "coverageReporters": [
       "text",
       "text-summary"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
     ]
   }
 }
