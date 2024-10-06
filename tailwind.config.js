@@ -25,12 +25,12 @@ module.exports = {
         destructive: 'hsl(352 100% 35%)',
         'destructive-foreground': 'hsl(352 100% 95%)',
         ring: 'hsl(262 50% 50%)',
-        danger: 'hsl(0 91% 49%)',
-      },
+        danger: 'hsl(0 91% 49%)'
+      }
       // boxShadow: {
       //   'custom': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
       // },
-    },
+    }
   },
   plugins: [
     require('nativewind/tailwind/native'),
@@ -38,22 +38,22 @@ module.exports = {
     function ({ addUtilities }) {
       const newUtilities = {
         '.elevation-1': {
-          elevation: 1,
+          elevation: 1
         },
         '.elevation-2': {
-          elevation: 2,
+          elevation: 2
         },
         '.elevation-3': {
-          elevation: 3,
+          elevation: 3
         },
         '.elevation-4': {
-          elevation: 4,
+          elevation: 4
         },
         '.elevation-5': {
-          elevation: 5,
-        },
-      }
-      addUtilities(newUtilities)
+          elevation: 5
+        }
+      };
+      addUtilities(newUtilities);
     }
-  ],
+  ]
 };

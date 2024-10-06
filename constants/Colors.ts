@@ -16,7 +16,7 @@ const Colors = {
   'accent-foreground': 'hsl(202 90% 95%)',
   danger: 'hsl(0 91% 49%)',
   muted: 'hsl(262 20% 25%)',
-  'muted-foreground': 'hsl(262 20% 80%)',
+  'muted-foreground': 'hsl(262 20% 80%)'
 };
 
 export default Colors;

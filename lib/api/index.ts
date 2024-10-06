@@ -4,10 +4,13 @@ import { Plant, Language } from '@/lib/types';
 
 const genAI = new GoogleGenerativeAI(GOOGLE_GEMINI_API_KEY);
 
-export const identifyPlant = async (base64Image: string, languages: Language[]): Promise<{ [key: string]: Plant }> => {
+export const identifyPlant = async (
+  base64Image: string,
+  languages: Language[]
+): Promise<{ [key: string]: Plant }> => {
   const selectedLanguages = languages.map((language) => language.languageName);
   const selectedLanguagesString = selectedLanguages.join(',');
-  console.log("🚀 ~ identifyPlant ~ selectedLanguagesString:", selectedLanguagesString)
+  console.log('🚀 ~ identifyPlant ~ selectedLanguagesString:', selectedLanguagesString);
 
   try {
     const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
@@ -46,7 +49,10 @@ export const identifyPlant = async (base64Image: string, languages: Language[]):
   }
 };
 
-export const parseGeminiResponse = (response: string, languages: Language[]): { [key: string]: Plant } => {
+export const parseGeminiResponse = (
+  response: string,
+  languages: Language[]
+): { [key: string]: Plant } => {
   try {
     // Remove Markdown code block syntax if present
     const cleanedResponse = response.replace(/```json\n?|\n?```/g, '').trim();
@@ -57,7 +63,7 @@ export const parseGeminiResponse = (response: string, languages: Language[]): { 
     // Validate the structure of the parsed response
     const validatedResponse: { [key: string]: Plant } = {};
 
-    languages.forEach(lang => {
+    languages.forEach((lang) => {
       if (parsedResponse[lang.languageCode]) {
         const plantInfo = parsedResponse[lang.languageCode];
         if (

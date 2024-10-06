@@ -48,12 +48,10 @@ export const resizeImage = async (uri: string): Promise<string> => {
   return manipulatedImage.uri;
 };
 
-
 export const getLanguageName = (code: string): string => {
-  const language = availableLanguages.find(lang => lang.languageCode === code);
+  const language = availableLanguages.find((lang) => lang.languageCode === code);
   return language ? language.languageName : `Language ${code}`;
 };
-
 
 // Convert HSL to RGB
 export const hslToRgb = (h: number, s: number, l: number): string => {
