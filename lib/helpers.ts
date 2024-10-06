@@ -1,4 +1,4 @@
-import { Plant } from '@/lib/types';
+import { Plant } from '@/types';
 import * as ImageManipulator from 'expo-image-manipulator';
 import { availableLanguages } from '../data/availableLanguages';
 

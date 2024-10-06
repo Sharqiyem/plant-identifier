@@ -14,12 +14,12 @@ import Animated, {
 } from 'react-native-reanimated';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { Ionicons } from '@expo/vector-icons';
-import { ScanHistoryItem, PlantWithMeta } from '@/lib/types';
-import { PlantCard } from '@/components/PlantCard';
+import { ScanHistoryItem, PlantWithMeta } from '@/types';
+import { PlantCard } from '@/components/common/PlantCard';
 import { getScanHistory, clearScanHistory, removeScanHistoryItem } from '@/lib/storage';
 import { useLanguageStore } from '@/lib/store';
-import { ResultModal } from '@/components/ResultModal';
-import HistoryItem from '@/components/HistoryItem';
+import { ResultModal } from '@/components/common/ResultModal';
+import HistoryItem from '@/components/history/HistoryItem';
 import Colors from '@/constants/Colors';
 
 const AnimatedTouchableOpacity = Animated.createAnimatedComponent(TouchableOpacity);

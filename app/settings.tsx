@@ -4,9 +4,9 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 
 import Checkbox from 'expo-checkbox';
-import { Language } from '@/lib/types';
+import { Language } from '@/types';
 import { loadSelectedLanguages, saveSelectedLanguages } from '@/lib/storage';
-import { availableLanguages } from '@/lib/data/availableLanguages';
+import { availableLanguages } from '@/data/availableLanguages';
 import { useLanguageStore } from '@/lib/store';
 import Colors from '@/constants/Colors';
 

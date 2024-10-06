@@ -14,8 +14,8 @@ import Animated, {
 } from 'react-native-reanimated';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { Ionicons } from '@expo/vector-icons';
-import { ScanHistoryItem, PlantWithMeta } from '@/lib/types';
-import { PlantCard } from '@/components/PlantCard';
+import { ScanHistoryItem, PlantWithMeta } from '@/types';
+import { PlantCard } from '@/components/common/PlantCard';
 import Colors from '@/constants/Colors';
 import { hslStringToRgb } from '@/lib/helpers';
 

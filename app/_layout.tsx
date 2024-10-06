@@ -1,4 +1,4 @@
-import '../global.css';
+// import '@/styles/global.css';
 
 import { Link, Stack } from 'expo-router';
 import { Theme, ThemeProvider } from '@react-navigation/native';

@@ -1,6 +1,6 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { GOOGLE_GEMINI_API_KEY } from '@env';
-import { Plant, Language } from '@/lib/types';
+import { Plant, Language } from '@/types';
 
 const genAI = new GoogleGenerativeAI(GOOGLE_GEMINI_API_KEY);
 

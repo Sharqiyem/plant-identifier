@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Platform } from 'react-native';
-import { Plant } from '@/lib/types';
+import { Plant } from '@/types';
 
 interface PlantCardProps {
   plant: Plant;

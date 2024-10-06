@@ -3,11 +3,11 @@ import { View, Image, ActivityIndicator, TouchableOpacity, Text } from 'react-na
 import Animated, { FadeIn, FadeOut, SlideInUp, SlideInDown } from 'react-native-reanimated';
 import { identifyPlant } from '@/lib/api';
 import { pickImage } from '@/lib/image';
-import { PlantWithMeta } from '@/lib/types';
-import { Button } from '@/components/Button';
-import { InfoSection } from '@/components/InfoSection';
-import { ResultModal } from '@/components/ResultModal';
-import { PlantCard } from '@/components/PlantCard';
+import { PlantWithMeta } from '@/types';
+import { Button } from '@/components/common/Button';
+import { InfoSection } from '@/components/home/InfoSection';
+import { ResultModal } from '@/components/common/ResultModal';
+import { PlantCard } from '@/components/common/PlantCard';
 import { saveScanToHistory } from '@/lib/storage';
 import { useLanguageStore } from '@/lib/store';
 import Colors from '@/constants/Colors';

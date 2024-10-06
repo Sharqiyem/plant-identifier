@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Modal, FlatList, SafeAreaView, Image } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
-import { PlantWithMeta, Language } from '@/lib/types';
-import { PlantCard } from '@/components/PlantCard';
+import { PlantWithMeta, Language } from '@/types';
+import { PlantCard } from '@/components/common/PlantCard';
 import { Ionicons } from '@expo/vector-icons';
 import Colors from '@/constants/Colors';
 

@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Language, Plant, ScanHistoryItem } from '@/lib/types';
+import { Language, Plant, ScanHistoryItem } from '@/types';
 
 export const loadSelectedLanguages = async (): Promise<Language[]> => {
   try {

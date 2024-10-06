@@ -1,4 +1,4 @@
-import { Plant } from '@/lib/types';
+import { Plant } from '@/types';
 
 export const mockIdentifyPlant = async (base64Image: string): Promise<Plant[]> => {
   // Simulate some delay to mimic API call
