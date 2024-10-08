@@ -19,6 +19,7 @@ export default function TabsLayout() {
 
   return (
     <Tabs
+      initialRouteName="index"
       screenOptions={{
         headerStyle: { backgroundColor: Colors.primary },
         headerTitleStyle: { color: Colors.text },

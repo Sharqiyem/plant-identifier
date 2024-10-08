@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { View, Image, ActivityIndicator, TouchableOpacity, Text } from 'react-native';
-import Animated, { FadeIn, FadeOut, SlideInUp, SlideInDown } from 'react-native-reanimated';
+import { Button } from '@/components/common/Button';
+import { PlantCard } from '@/components/common/PlantCard';
+import { ResultModal } from '@/components/common/ResultModal';
+import { InfoSection } from '@/components/home/InfoSection';
+import Colors from '@/constants/Colors';
 import { identifyPlant } from '@/lib/api';
 import { pickImage } from '@/lib/image';
-import { PlantWithMeta } from '@/types';
-import { Button } from '@/components/common/Button';
-import { InfoSection } from '@/components/home/InfoSection';
-import { ResultModal } from '@/components/common/ResultModal';
-import { PlantCard } from '@/components/common/PlantCard';
 import { saveScanToHistory } from '@/lib/storage';
-import { useLanguageStore } from '@/lib/store';
-import Colors from '@/constants/Colors';
+import { useHistoryStore } from '@/store/useHistoryStore';
+import { useLanguageStore } from '@/store/useLanguageStore';
+import { PlantWithMeta } from '@/types';
+import { useFocusEffect } from 'expo-router';
+import React, { useCallback, useState } from 'react';
+import { ActivityIndicator, Image, Text, TouchableOpacity, View } from 'react-native';
+import Animated, { FadeIn, SlideInDown, SlideInUp } from 'react-native-reanimated';
 
 const Home: React.FC = () => {
   const [image, setImage] = useState<string | null>(null);
@@ -23,10 +25,14 @@ const Home: React.FC = () => {
   const [identifiedPlant, setIdentifiedPlant] = useState<{ [key: string]: PlantWithMeta } | null>(
     null
   );
+  const { addHistoryItem } = useHistoryStore();
+  console.log('🚀 ~ selectedLanguages:', selectedLanguages);
 
-  useEffect(() => {
-    loadLanguages();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      loadLanguages();
+    }, [loadLanguages])
+  );
 
   const handleImagePick = async (useCamera: boolean) => {
     const result = await pickImage(useCamera);
@@ -42,7 +48,11 @@ const Home: React.FC = () => {
     setLoading(true);
     setError(null);
     try {
-      const plantData = await identifyPlant(base64, selectedLanguages);
+      console.log('🚀 ~ identifyPlantFromImage ~ selectedLanguages:', selectedLanguages);
+      const plantData = await identifyPlant(
+        base64,
+        selectedLanguages ?? [{ languageCode: 'en', languageName: 'English' }]
+      );
       const timestamp = new Date().toISOString();
 
       // Convert Plant to PlantWithMeta
@@ -57,6 +67,7 @@ const Home: React.FC = () => {
 
       try {
         await saveScanToHistory(plantDataWithMeta, previewUri);
+        addHistoryItem(plantDataWithMeta);
       } catch (saveError) {
         console.error('Error saving scan to history:', saveError);
       }

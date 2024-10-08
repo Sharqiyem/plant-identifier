@@ -1,41 +1,55 @@
-import React, { useEffect } from 'react';
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
-import { useRouter } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
-
-import Checkbox from 'expo-checkbox';
-import { Language } from '@/types';
-import { availableLanguages } from '@/data/languages';
-import { useLanguageStore } from '@/lib/store';
+/* eslint-disable react-hooks/exhaustive-deps */
 import Colors from '@/constants/Colors';
+import { availableLanguages } from '@/data/languages';
+import { useLanguageStore } from '@/store/useLanguageStore';
+import { Language } from '@/types';
+import { useNavigation } from '@react-navigation/native';
+import Checkbox from 'expo-checkbox';
+import React, { useEffect, useState } from 'react';
+import { Alert, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 
 export default function Settings() {
   const { selectedLanguages, addLanguage, removeLanguage, loadLanguages, saveLanguages } =
     useLanguageStore();
-  const router = useRouter();
+  const navigation = useNavigation();
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
+
+  useEffect(() => {
+    if (!isInitialLoad && selectedLanguages.length > 0) {
+      saveLanguages();
+    }
+  }, [selectedLanguages, isInitialLoad]);
 
   useEffect(() => {
     loadLanguages();
   }, []);
+
+  useEffect(() => {
+    if (!isInitialLoad) {
+      const unsubscribe = navigation.addListener('beforeRemove', (e) => {
+        if (selectedLanguages.length === 0) {
+          e.preventDefault();
+          Alert.alert(
+            'No Language Selected',
+            'Please select at least one language before leaving this screen.',
+            [{ text: 'OK' }]
+          );
+        } else {
+          saveLanguages();
+        }
+      });
+
+      return unsubscribe;
+    } else {
+      setIsInitialLoad(false);
+    }
+  }, [navigation, selectedLanguages, isInitialLoad]);
 
   const toggleLanguage = (language: Language) => {
     if (selectedLanguages.some((lang) => lang.languageCode === language.languageCode)) {
       removeLanguage(language.languageCode);
     } else {
       addLanguage(language);
-    }
-  };
-
-  const handleSaveLanguages = async () => {
-    if (selectedLanguages.length === 0) {
-      alert('Please select at least one language.');
-      return;
-    }
-    try {
-      await saveLanguages();
-      router.back();
-    } catch (error) {
-      console.error('Error saving selected languages:', error);
     }
   };
 
@@ -70,15 +84,6 @@ export default function Settings() {
           </TouchableOpacity>
         ))}
       </ScrollView>
-      <TouchableOpacity
-        accessibilityLabel="Save"
-        testID="save-button"
-        onPress={handleSaveLanguages}
-        className="bg-primary py-3 px-6 rounded-lg mt-4 flex-row items-center justify-center"
-      >
-        <Ionicons name="save-outline" size={24} color="white" style={{ marginRight: 8 }} />
-        <Text className="text-primary-foreground text-center font-bold">Save</Text>
-      </TouchableOpacity>
     </View>
   );
 }

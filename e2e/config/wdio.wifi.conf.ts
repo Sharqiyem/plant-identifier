@@ -16,7 +16,7 @@ export const config: WebdriverIO.Config = {
       'appium:noReset': true,
       'appium:fullReset': false,
       'appium:adbExecTimeout': 120000, // Increased timeout for ADB commands
-      'appium:androidDeviceReadyTimeout': 120000, // Increased timeout for device readiness
+      'appium:androidDeviceReadyTimeout': 120000 // Increased timeout for device readiness
     }
   ],
   logLevel: 'info',

@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Modal, FlatList, SafeAreaView, Image } from 'react-native';
-import { PlantWithMeta, Language, BaseTestingComponentProps } from '@/types';
 import { PlantCard } from '@/components/common/PlantCard';
-import { Ionicons } from '@expo/vector-icons';
 import Colors from '@/constants/Colors';
+import { BaseTestingComponentProps, Language, PlantWithMeta } from '@/types';
+import { Ionicons } from '@expo/vector-icons';
+import React, { useState } from 'react';
+import { FlatList, Image, Modal, SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
 
 interface ResultModalProps extends BaseTestingComponentProps {
   visible: boolean;
@@ -18,7 +18,7 @@ export const ResultModal: React.FC<ResultModalProps> = ({
   plantInfo,
   languages
 }) => {
-  const [selectedLanguage, setSelectedLanguage] = useState(languages[0]?.languageCode || 'en');
+  const [selectedLanguage] = useState(languages[0]?.languageCode || 'en');
 
   const languageCodes = Object.keys(plantInfo);
   const previewUri = plantInfo[languageCodes[0]]?.previewUri;

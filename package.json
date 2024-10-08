@@ -15,7 +15,8 @@
     "build:tailwind": "tailwindcss --config tailwind.config.js -i ./styles/globals.css -o ./styles/output.css",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "wdio": "wdio run ./wdio.conf.ts"
+    "wdio": "wdio run ./wdio.conf.ts",
+    "prettier": "prettier . --write"
   },
   "dependencies": {
     "@expo/vector-icons": "^14.0.2",

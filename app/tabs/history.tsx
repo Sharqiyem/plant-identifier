@@ -1,57 +1,34 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import { View, Text, Image, Pressable, TouchableOpacity, Alert, Dimensions } from 'react-native';
-import { Stack } from 'expo-router';
-import Animated, {
-  SlideInDown,
-  SlideOutDown,
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming,
-  runOnJS,
-  interpolate,
-  Extrapolate,
-  useAnimatedGestureHandler,
-  FadeIn
-} from 'react-native-reanimated';
-import { Gesture, GestureDetector } from 'react-native-gesture-handler';
-import { Ionicons } from '@expo/vector-icons';
-import { ScanHistoryItem, PlantWithMeta } from '@/types';
-import { PlantCard } from '@/components/common/PlantCard';
-import { getScanHistory, clearScanHistory, removeScanHistoryItem } from '@/lib/storage';
-import { useLanguageStore } from '@/lib/store';
 import { ResultModal } from '@/components/common/ResultModal';
 import HistoryItem from '@/components/history/HistoryItem';
+import HistoryItemSkeleton from '@/components/history/HistoryItemSkeleton';
 import Colors from '@/constants/Colors';
-
-const AnimatedTouchableOpacity = Animated.createAnimatedComponent(TouchableOpacity);
-const { width: SCREEN_WIDTH } = Dimensions.get('window');
-const SWIPE_THRESHOLD = -75;
+import { useHistoryStore } from '@/store/useHistoryStore';
+import { useLanguageStore } from '@/store/useLanguageStore';
+import { ScanHistoryItem } from '@/types';
+import { Ionicons } from '@expo/vector-icons';
+import { Stack } from 'expo-router';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Alert, Pressable, View } from 'react-native';
+import Animated, { FadeIn, Layout } from 'react-native-reanimated';
 
 const History = () => {
-  const [history, setHistory] = useState<ScanHistoryItem[]>([]);
+  const { history, loadHistory, clearHistory, removeHistoryItem, loading } = useHistoryStore();
   const [selectedItem, setSelectedItem] = useState<ScanHistoryItem | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
   const { selectedLanguages } = useLanguageStore();
 
   useEffect(() => {
     loadHistory();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const loadHistory = async () => {
-    const storedHistory = await getScanHistory();
-    setHistory(storedHistory);
-  };
-
-  const cleanHistory = async () => {
+  const handleCleanHistory = () => {
     Alert.alert('Clean History', 'Are you sure you want to clear all history?', [
       { text: 'Cancel', style: 'cancel' },
       {
         text: 'Clear',
         style: 'destructive',
-        onPress: async () => {
-          await clearScanHistory();
-          setHistory([]);
-        }
+        onPress: clearHistory
       }
     ]);
   };
@@ -61,30 +38,37 @@ const History = () => {
     setModalVisible(true);
   }, []);
 
-  const handleDeleteItem = useCallback(async (index: number) => {
-    Alert.alert('Delete Item', 'Are you sure you want to delete this item?', [
-      { text: 'Cancel', style: 'cancel' },
-      {
-        text: 'Delete',
-        style: 'destructive',
-        onPress: async () => {
-          await removeScanHistoryItem(index);
-          loadHistory(); // Reload the history after deletion
+  const handleDeleteItem = useCallback(
+    (index: number) => {
+      Alert.alert('Delete Item', 'Are you sure you want to delete this item?', [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Delete',
+          style: 'destructive',
+          onPress: () => removeHistoryItem(index)
         }
-      }
-    ]);
-  }, []);
+      ]);
+    },
+    [removeHistoryItem]
+  );
 
   const renderItem = useCallback(
     ({ item, index }: { item: ScanHistoryItem; index: number }) => (
-      <HistoryItem
-        item={item}
-        index={index}
-        onDelete={handleDeleteItem}
-        onPress={handleItemPress}
-      />
+      <Animated.View entering={FadeIn.delay(index * 50).duration(200)} layout={Layout.springify()}>
+        {loading ? (
+          <HistoryItemSkeleton />
+        ) : (
+          <HistoryItem
+            item={item}
+            index={index}
+            onDelete={handleDeleteItem}
+            onPress={handleItemPress}
+            isLoading={loading}
+          />
+        )}
+      </Animated.View>
     ),
-    [handleDeleteItem, handleItemPress]
+    [handleDeleteItem, handleItemPress, loading]
   );
 
   return (
@@ -92,29 +76,27 @@ const History = () => {
       <Stack.Screen
         options={{
           headerRight: () => (
-            <Pressable className="  bg-primary/10  rounded-full" onPress={cleanHistory}>
+            <Pressable className="bg-primary/10 rounded-full mx-4" onPress={handleCleanHistory}>
               <Ionicons
                 name="trash-outline"
                 size={24}
                 color={history.length === 0 ? Colors.muted : Colors.text}
-                // style={{ marginRight: 4 }}
               />
-              {/* <Text className="text-sm font-semibold text-primary">Clean History</Text> */}
             </Pressable>
           )
         }}
       />
-      <Animated.View style={{ flex: 1 }}>
+      <View style={{ flex: 1 }}>
         <Animated.FlatList
           showsVerticalScrollIndicator={false}
-          data={history}
+          data={loading ? Array(5).fill({}) : history}
           renderItem={renderItem}
           keyExtractor={(item, index) => index.toString()}
           contentContainerStyle={{ padding: 16 }}
           removeClippedSubviews={false}
           scrollEventThrottle={16}
         />
-      </Animated.View>
+      </View>
       {selectedItem && (
         <ResultModal
           visible={modalVisible}

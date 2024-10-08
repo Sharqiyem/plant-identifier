@@ -1,32 +1,27 @@
 /* eslint-disable react/display-name */
-import React, { useCallback } from 'react';
-import {
-  View,
-  Image,
-  TouchableOpacity,
-  Dimensions,
-  Text,
-  TouchableOpacityProps
-} from 'react-native';
-import Animated, {
-  SlideInDown,
-  SlideOutDown,
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming,
-  runOnJS,
-  interpolate,
-  clamp,
-  useAnimatedProps,
-  interpolateColor,
-  FadeInRight
-} from 'react-native-reanimated';
-import { Gesture, GestureDetector } from 'react-native-gesture-handler';
-import { Ionicons } from '@expo/vector-icons';
-import { ScanHistoryItem, PlantWithMeta } from '@/types';
 import { PlantCard } from '@/components/common/PlantCard';
 import Colors from '@/constants/Colors';
 import { hslStringToRgb } from '@/lib/helpers';
+import { PlantWithMeta, ScanHistoryItem } from '@/types';
+import { Ionicons } from '@expo/vector-icons';
+import React, { useCallback } from 'react';
+import { Dimensions, Image, TouchableOpacity, TouchableOpacityProps, View } from 'react-native';
+import { Gesture, GestureDetector } from 'react-native-gesture-handler';
+import Animated, {
+  clamp,
+  FadeInRight,
+  interpolate,
+  interpolateColor,
+  Layout,
+  runOnJS,
+  SlideInDown,
+  SlideOutDown,
+  useAnimatedProps,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming
+} from 'react-native-reanimated';
+import HistoryItemSkeleton from './HistoryItemSkeleton';
 
 const AnimatedTouchableOpacity = Animated.createAnimatedComponent(
   TouchableOpacity
@@ -43,12 +38,14 @@ const HistoryItem = React.memo(
     item,
     index,
     onDelete,
-    onPress
+    onPress,
+    isLoading
   }: {
     item: ScanHistoryItem;
     index: number;
     onDelete: (index: number) => void;
     onPress: (item: ScanHistoryItem) => void;
+    isLoading: boolean;
   }) => {
     const firstLanguage = Object.keys(item)[0];
     const plantInfo: PlantWithMeta = item[firstLanguage];
@@ -130,8 +127,12 @@ const HistoryItem = React.memo(
       onDelete(index);
     }, [onDelete, index]);
 
+    if (isLoading) {
+      return <HistoryItemSkeleton />;
+    }
+
     return (
-      <View className="mb-4" style={{ width: SCREEN_WIDTH }}>
+      <Animated.View className="mb-4" style={{ width: SCREEN_WIDTH }} layout={Layout.springify()}>
         <Animated.View
           entering={SlideInDown.delay(index * 50)
             .duration(100)
@@ -218,7 +219,7 @@ const HistoryItem = React.memo(
             <Ionicons name="close" size={20} color="white" />
           </AnimatedTouchableOpacity>
         </Animated.View>
-      </View>
+      </Animated.View>
     );
   }
 );

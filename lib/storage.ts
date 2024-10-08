@@ -4,6 +4,7 @@ import { Language, Plant, ScanHistoryItem } from '@/types';
 export const loadSelectedLanguages = async (): Promise<Language[]> => {
   try {
     const savedLanguages = await AsyncStorage.getItem('selectedLanguages');
+    console.log('🚀 ~ loadSelectedLanguages ~ savedLanguages:', savedLanguages);
     if (savedLanguages) {
       return JSON.parse(savedLanguages);
     } else {
@@ -85,5 +86,18 @@ export const removeScanHistoryItem = async (index: number): Promise<void> => {
     }
   } catch (error) {
     console.error('Error removing scan history item:', error);
+  }
+};
+
+export const addScanHistoryItem = async (item: ScanHistoryItem) => {
+  try {
+    const historyJson = await AsyncStorage.getItem('scanHistory');
+    if (historyJson) {
+      const history: ScanHistoryItem[] = JSON.parse(historyJson);
+      history.unshift(item);
+      await AsyncStorage.setItem('scanHistory', JSON.stringify(history));
+    }
+  } catch (error) {
+    console.error('Error adding scan history item:', error);
   }
 };

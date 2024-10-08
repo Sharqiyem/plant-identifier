@@ -1,7 +1,7 @@
-import React from 'react';
-import { render, fireEvent, waitFor } from '@testing-library/react-native';
 import HistoryItem from '@/components/history/HistoryItem'; // Adjust the import path as needed
 import { PlantWithMeta } from '@/types';
+import { fireEvent, render, waitFor } from '@testing-library/react-native';
+import React from 'react';
 
 // Mock the dependencies
 jest.mock('react-native-reanimated', () => require('react-native-reanimated/mock'));
@@ -50,11 +50,12 @@ describe('HistoryItem', () => {
     item: mockItem,
     index: 0,
     onDelete: mockOnDelete,
-    onPress: mockOnPress
+    onPress: mockOnPress,
+    isLoading: false
   };
 
   it('renders correctly', async () => {
-    const { getByTestId, findByText } = render(<HistoryItem {...defaultProps} />);
+    const { getByTestId } = render(<HistoryItem {...defaultProps} />);
 
     await waitFor(() => {
       expect(getByTestId('plant-image')).toBeTruthy();

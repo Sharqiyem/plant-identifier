@@ -1,6 +1,3 @@
-const tintColorLight = '#2f95dc';
-const tintColorDark = '#fff';
-
 const Colors = {
   primary: 'hsl(262 50% 55%)',
   background: 'hsl(262 35% 10%)',

@@ -1,8 +1,9 @@
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import { Language, Plant } from '@/types';
 import { GOOGLE_GEMINI_API_KEY } from '@env';
-import { Plant, Language } from '@/types';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 
 const genAI = new GoogleGenerativeAI(GOOGLE_GEMINI_API_KEY);
+console.log('🚀 ~ genAI:', genAI);
 
 export const identifyPlant = async (
   base64Image: string,
@@ -10,7 +11,7 @@ export const identifyPlant = async (
 ): Promise<{ [key: string]: Plant }> => {
   const selectedLanguages = languages.map((language) => language.languageName);
   const selectedLanguagesString = selectedLanguages.join(',');
-  console.log('🚀 ~ identifyPlant ~ selectedLanguagesString:', selectedLanguagesString);
+  console.log('🚀 ~ identifyPlant ~ selectedLanguagesString:', languages);
 
   try {
     const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
@@ -23,7 +24,7 @@ export const identifyPlant = async (
           "family": "",
           "description": ""
         },
-        "${languages[1].languageCode}": {
+        "${languages[0].languageCode}": {
           "name": "",
           "scientificName": "",
           "family": "",

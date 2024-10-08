@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { Language } from '@/types';
-import { loadSelectedLanguages, saveSelectedLanguages } from './storage';
+import { loadSelectedLanguages, saveSelectedLanguages } from '../lib/storage';
 
 interface LanguageState {
   selectedLanguages: Language[];
@@ -25,8 +25,13 @@ export const useLanguageStore = create<LanguageState>((set, get) => ({
       )
     })),
   loadLanguages: async () => {
-    const languages = await loadSelectedLanguages();
-    set({ selectedLanguages: languages });
+    const storedLanguages = await loadSelectedLanguages();
+    set({
+      selectedLanguages:
+        storedLanguages.length > 0
+          ? storedLanguages
+          : [{ languageCode: 'en', languageName: 'English' }]
+    });
   },
   saveLanguages: async () => {
     const { selectedLanguages } = get();
