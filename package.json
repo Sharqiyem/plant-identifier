@@ -10,6 +10,7 @@
     "test": "jest --watchAll --testMatch='**/__tests__/**/*.test.[jt]s?(x)'",
     "test:coverage": "jest --coverage --coverageReporters=\"text\" --coverageReporters=\"text-summary\"",
     "appium:test": "wdio run wdio.conf.ts",
+    "appium:test:wifi": "wdio run ./e2e/config/wdio.wifi.conf.ts",
     "format": "prettier . --write",
     "build:tailwind": "tailwindcss --config tailwind.config.js -i ./styles/globals.css -o ./styles/output.css",
     "lint": "eslint .",

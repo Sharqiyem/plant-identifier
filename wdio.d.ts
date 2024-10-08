@@ -31,6 +31,9 @@ declare module WebdriverIO {
         'appium:appActivity': string;
         'appium:noReset': boolean;
         'appium:fullReset': boolean;
+        'appium:udid'?: string;
+        'appium:adbExecTimeout'?: number;
+        'appium:androidDeviceReadyTimeout'?: number;
     }
 
     interface Config {
