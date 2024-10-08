@@ -7,12 +7,14 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "test": "jest --watchAll",
+    "test": "jest --watchAll --testMatch='**/__tests__/**/*.test.[jt]s?(x)'",
     "test:coverage": "jest --coverage --coverageReporters=\"text\" --coverageReporters=\"text-summary\"",
+    "appium:test": "wdio run wdio.conf.ts",
     "format": "prettier . --write",
     "build:tailwind": "tailwindcss --config tailwind.config.js -i ./styles/globals.css -o ./styles/output.css",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "wdio": "wdio run ./wdio.conf.ts"
   },
   "dependencies": {
     "@expo/vector-icons": "^14.0.2",
@@ -52,8 +54,19 @@
     "@testing-library/jest-native": "^5.4.3",
     "@testing-library/react-native": "^12.7.2",
     "@types/jest": "^29.5.13",
+    "@types/mocha": "^10.0.8",
+    "@types/node": "^22.7.4",
     "@types/react": "~18.2.45",
     "@types/react-test-renderer": "^18.3.0",
+    "@wdio/appium-service": "^9.1.2",
+    "@wdio/cli": "^9.1.2",
+    "@wdio/local-runner": "^9.1.2",
+    "@wdio/mocha-framework": "^9.1.2",
+    "@wdio/spec-reporter": "^9.1.2",
+    "@wdio/types": "^9.1.2",
+    "@wdio/visual-service": "^6.2.0",
+    "appium": "^2.11.5",
+    "appium-uiautomator2-driver": "^3.8.0",
     "eslint": "^8.57.0",
     "eslint-config-expo": "^7.1.2",
     "husky": "^9.1.6",
@@ -62,7 +75,9 @@
     "lint-staged": "^15.2.10",
     "react-test-renderer": "18.2.0",
     "tailwindcss": "3.3.2",
-    "typescript": "~5.3.3"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.2",
+    "webdriverio": "^9.1.2"
   },
   "private": true,
   "jest": {

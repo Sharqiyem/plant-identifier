@@ -1,5 +1,13 @@
+/* eslint-disable react/display-name */
 import React, { useCallback } from 'react';
-import { View, Image, TouchableOpacity, Dimensions, Text } from 'react-native';
+import {
+  View,
+  Image,
+  TouchableOpacity,
+  Dimensions,
+  Text,
+  TouchableOpacityProps
+} from 'react-native';
 import Animated, {
   SlideInDown,
   SlideOutDown,
@@ -20,7 +28,10 @@ import { PlantCard } from '@/components/common/PlantCard';
 import Colors from '@/constants/Colors';
 import { hslStringToRgb } from '@/lib/helpers';
 
-const AnimatedTouchableOpacity = Animated.createAnimatedComponent(TouchableOpacity);
+const AnimatedTouchableOpacity = Animated.createAnimatedComponent(
+  TouchableOpacity
+) as React.ComponentClass<Animated.AnimateProps<TouchableOpacityProps>>;
+
 const SWIPE_THRESHOLD = -75;
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
@@ -128,57 +139,59 @@ const HistoryItem = React.memo(
           exiting={SlideOutDown.duration(500)}
           style={{ width: SCREEN_WIDTH, marginBottom: 16 }}
         >
-          <GestureDetector testID="history-item-gesture" gesture={composedGestures}>
-            <Animated.View
-              className="bg-red-500"
-              style={[
-                { flexDirection: 'row', width: SCREEN_WIDTH + Math.abs(SWIPE_THRESHOLD) },
-                rStyle
-              ]}
-            >
-              <Animated.View style={{ width: SCREEN_WIDTH - Math.abs(SWIPE_THRESHOLD / 2) }}>
-                <AnimatedTouchableOpacity
-                  testID="history-item-touchable"
-                  animatedProps={animatedCardProps}
-                  className="bg-card rounded-lg overflow-hidden"
-                  onPress={() => onPress(item)}
-                  activeOpacity={0.9}
-                >
-                  <Image
-                    testID="plant-image"
-                    source={{ uri: plantInfo.previewUri }}
-                    className="w-full h-40 object-cover"
-                  />
-                  <View className="p-4">
-                    <PlantCard
-                      testID="plant-card"
-                      plant={plantInfo}
-                      showTimestamp
-                      timestamp={plantInfo.timestamp}
-                    />
-                  </View>
-                </AnimatedTouchableOpacity>
-              </Animated.View>
+          <View testID="history-item-gesture">
+            <GestureDetector gesture={composedGestures}>
               <Animated.View
+                className="bg-red-500"
                 style={[
-                  rDeleteButtonStyle,
-                  {
-                    width: Math.abs(SWIPE_THRESHOLD),
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                  }
+                  { flexDirection: 'row', width: SCREEN_WIDTH + Math.abs(SWIPE_THRESHOLD) },
+                  rStyle
                 ]}
               >
-                <TouchableOpacity
-                  testID="delete-button"
-                  onPress={handleDelete}
-                  className="p-4 rounded-lg"
+                <Animated.View style={{ width: SCREEN_WIDTH - Math.abs(SWIPE_THRESHOLD / 2) }}>
+                  <AnimatedTouchableOpacity
+                    testID="history-item-touchable"
+                    animatedProps={animatedCardProps as any}
+                    className="bg-card rounded-lg overflow-hidden"
+                    onPress={() => onPress(item)}
+                    activeOpacity={0.9}
+                  >
+                    <Image
+                      testID="plant-image"
+                      source={{ uri: plantInfo.previewUri }}
+                      className="w-full h-40 object-cover"
+                    />
+                    <View className="p-4">
+                      <PlantCard
+                        testID="plant-card"
+                        plant={plantInfo}
+                        showTimestamp
+                        timestamp={plantInfo.timestamp}
+                      />
+                    </View>
+                  </AnimatedTouchableOpacity>
+                </Animated.View>
+                <Animated.View
+                  style={[
+                    rDeleteButtonStyle,
+                    {
+                      width: Math.abs(SWIPE_THRESHOLD),
+                      justifyContent: 'center',
+                      alignItems: 'center'
+                    }
+                  ]}
                 >
-                  <Ionicons name="trash-outline" size={24} color="white" />
-                </TouchableOpacity>
+                  <TouchableOpacity
+                    testID="delete-button"
+                    onPress={handleDelete}
+                    className="p-4 rounded-lg"
+                  >
+                    <Ionicons name="trash-outline" size={24} color="white" />
+                  </TouchableOpacity>
+                </Animated.View>
               </Animated.View>
-            </Animated.View>
-          </GestureDetector>
+            </GestureDetector>
+          </View>
         </Animated.View>
 
         <Animated.View
@@ -199,7 +212,7 @@ const HistoryItem = React.memo(
         >
           <AnimatedTouchableOpacity
             testID="corner-delete-button"
-            animatedProps={animatedCloseButtonProps}
+            animatedProps={animatedCloseButtonProps as any}
             onPress={handleDelete}
           >
             <Ionicons name="close" size={20} color="white" />

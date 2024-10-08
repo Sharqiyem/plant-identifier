@@ -1,3 +1,5 @@
+import { ViewProps } from "react-native";
+
 export interface Language {
   languageCode: string;
   languageName: string;
@@ -17,4 +19,8 @@ export interface PlantWithMeta extends Plant {
 
 export interface ScanHistoryItem {
   [languageCode: string]: PlantWithMeta;
+}
+
+export interface BaseTestingComponentProps extends ViewProps {
+  accessibilityLabel?: string;
 }

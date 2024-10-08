@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Text, Platform } from 'react-native';
-import { Plant } from '@/types';
+import { BaseTestingComponentProps, Plant } from '@/types';
 
-interface PlantCardProps {
+interface PlantCardProps extends BaseTestingComponentProps {
   plant: Plant;
   showTimestamp?: boolean;
   timestamp?: string;

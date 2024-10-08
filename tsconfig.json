@@ -6,5 +6,13 @@
       "@/*": ["./*"]
     }
   },
+  "types": [
+    "node",
+    "@wdio/globals/types",
+    "expect-webdriverio",
+    "@wdio/mocha-framework",
+    "@wdio/appium-service",
+    "./wdio.d.ts"
+  ],
   "include": ["**/*.ts", "**/*.tsx"]
 }

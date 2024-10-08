@@ -1,0 +1,8 @@
+{
+  "jest.testMatch": ["**/__tests__/**/*.test.[jt]s?(x)"],
+  "jest.runMode": {
+    "type": "watch",
+    "onStartup": ["all-tests"],
+    "onSave": "test-only-changed-and-failed"
+  }
+}

@@ -5,7 +5,7 @@ export const pickImage = async (
   useCamera: boolean
 ): Promise<{ uri: string; base64: string; resizedUri: string } | null> => {
   let result;
-  const options = {
+  const options: ImagePicker.ImagePickerOptions = {
     mediaTypes: ImagePicker.MediaTypeOptions.Images,
     allowsEditing: true,
     aspect: [4, 3],

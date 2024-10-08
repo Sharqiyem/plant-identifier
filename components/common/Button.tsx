@@ -1,10 +1,10 @@
 import React from 'react';
-import { TouchableOpacity, Text } from 'react-native';
+import { TouchableOpacity, Text, TouchableOpacityProps } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { twMerge } from 'tailwind-merge';
 import Colors from '@/constants/Colors';
 
-interface ButtonProps {
+interface ButtonProps extends TouchableOpacityProps {
   title: string;
   iconName: keyof typeof Ionicons.glyphMap;
   onPress: () => void;

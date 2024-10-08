@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Modal, FlatList, SafeAreaView, Image } from 'react-native';
-import { PlantWithMeta, Language } from '@/types';
+import { PlantWithMeta, Language, BaseTestingComponentProps } from '@/types';
 import { PlantCard } from '@/components/common/PlantCard';
 import { Ionicons } from '@expo/vector-icons';
 import Colors from '@/constants/Colors';
 
-interface ResultModalProps {
+interface ResultModalProps extends BaseTestingComponentProps {
   visible: boolean;
   onClose: () => void;
   plantInfo: { [key: string]: PlantWithMeta };

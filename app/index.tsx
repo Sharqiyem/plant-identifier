@@ -85,6 +85,7 @@ const Home: React.FC = () => {
           onPress={() => handleImagePick(false)}
           disabled={loading}
           className="flex-1"
+          accessibilityLabel="Gallery"
         />
         <Button
           title="Camera"
@@ -92,6 +93,7 @@ const Home: React.FC = () => {
           onPress={() => handleImagePick(true)}
           disabled={loading}
           className="flex-1"
+          accessibilityLabel="Camera"
         />
       </Animated.View>
 
@@ -124,15 +126,22 @@ const Home: React.FC = () => {
 
       {error && (
         <Animated.View entering={FadeIn} className="mt-4">
-          <Text className="text-red-500 text-center">{error}</Text>
+          <Text accessibilityLabel="ErrorMessage" className="text-red-500 text-center">
+            {error}
+          </Text>
         </Animated.View>
       )}
 
       {identifiedPlant && !loading && (
         <Animated.View entering={FadeIn.delay(300)} className="mt-4">
           <TouchableOpacity onPress={() => setModalVisible(true)} className="pb-8">
-            <PlantCard plant={Object.values(identifiedPlant)[0]} />
-            <Text className="text-center text-primary mt-2 underline">View all results</Text>
+            <PlantCard accessibilityLabel="PlantCard" plant={Object.values(identifiedPlant)[0]} />
+            <Text
+              accessibilityLabel="ViewAllResults"
+              className="text-center text-primary mt-2 underline"
+            >
+              View all results
+            </Text>
           </TouchableOpacity>
         </Animated.View>
       )}
@@ -142,6 +151,7 @@ const Home: React.FC = () => {
         onClose={() => setModalVisible(false)}
         plantInfo={identifiedPlant || {}}
         languages={selectedLanguages}
+        accessibilityLabel="ResultModal"
       />
     </View>
   );
