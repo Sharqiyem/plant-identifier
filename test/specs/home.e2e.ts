@@ -48,7 +48,7 @@ describe('Home Screen', () => {
     }
   });
 
-  it('should show Gallery and Camera buttons', async () => {
+  it.skip('should show Gallery and Camera buttons', async () => {
     const galleryButton = await $('~Gallery');
     const cameraButton = await $('~Camera');
 

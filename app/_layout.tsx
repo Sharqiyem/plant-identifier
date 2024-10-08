@@ -37,12 +37,23 @@ export default function Layout() {
                 headerTintColor: Colors.text,
                 headerTitleAlign: 'center',
                 headerRight: () => (
-                  <View className="flex-row">
+                  <View testID="header-container" className="flex-row">
                     <Link href="/settings" className="mr-4">
-                      <MaterialIcons name="settings" size={32} color={Colors.text} />
+                      <MaterialIcons
+                        testID="settings-icon"
+                        accessibilityLabel="Go to Settings"
+                        name="settings"
+                        size={32}
+                        color={Colors.text}
+                      />
                     </Link>
                     <Link href="/history">
-                      <MaterialIcons name="history" size={32} color={Colors.text} />
+                      <MaterialIcons
+                        testID="history-icon"
+                        name="history"
+                        size={32}
+                        color={Colors.text}
+                      />
                     </Link>
                   </View>
                 )

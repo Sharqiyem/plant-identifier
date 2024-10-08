@@ -1,6 +1,7 @@
 declare module WebdriverIO {
     interface Element {
         waitAndClick: () => void;
+        getAttribute(name: string): Promise<string | null>;
     }
 
     interface Browser {

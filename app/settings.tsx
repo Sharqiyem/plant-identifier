@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 
 import Checkbox from 'expo-checkbox';
 import { Language } from '@/types';
-import { loadSelectedLanguages, saveSelectedLanguages } from '@/lib/storage';
 import { availableLanguages } from '@/data/languages';
 import { useLanguageStore } from '@/lib/store';
 import Colors from '@/constants/Colors';
@@ -42,7 +41,12 @@ export default function Settings() {
 
   return (
     <View className="flex-1 bg-background p-4">
-      <Text className="text-2xl font-bold mb-4 text-foreground">Select Languages</Text>
+      <Text
+        accessibilityLabel="Select Languages"
+        className="text-2xl font-bold mb-4 text-foreground"
+      >
+        Select Languages
+      </Text>
       <ScrollView className="flex-1">
         {availableLanguages.map((language) => (
           <TouchableOpacity
@@ -51,6 +55,8 @@ export default function Settings() {
             className="flex-row items-center p-4 mb-2 bg-card rounded-lg"
           >
             <Checkbox
+              testID={`checkbox-${language.languageCode}`}
+              accessibilityLabel={language.languageName}
               value={selectedLanguages.some((lang) => lang.languageCode === language.languageCode)}
               onValueChange={() => toggleLanguage(language)}
               color={
@@ -65,6 +71,8 @@ export default function Settings() {
         ))}
       </ScrollView>
       <TouchableOpacity
+        accessibilityLabel="Save"
+        testID="save-button"
         onPress={handleSaveLanguages}
         className="bg-primary py-3 px-6 rounded-lg mt-4 flex-row items-center justify-center"
       >
