@@ -49,7 +49,7 @@ exports[`ResultModal matches snapshot 1`] = `
             "marginTop": 16,
           },
           {
-            "backgroundColor": "hsl(262, 35%, 11%)",
+            "backgroundColor": "hsl(221.2, 50%, 10%)",
           },
           {
             "borderBottomLeftRadius": 8,
@@ -85,10 +85,10 @@ exports[`ResultModal matches snapshot 1`] = `
               "borderBottomWidth": 1,
             },
             {
-              "borderBottomColor": "hsl(262, 20%, 20%)",
-              "borderLeftColor": "hsl(262, 20%, 20%)",
-              "borderRightColor": "hsl(262, 20%, 20%)",
-              "borderTopColor": "hsl(262, 20%, 20%)",
+              "borderBottomColor": "hsl(221.2, 30%, 26%)",
+              "borderLeftColor": "hsl(221.2, 30%, 26%)",
+              "borderRightColor": "hsl(221.2, 30%, 26%)",
+              "borderTopColor": "hsl(221.2, 30%, 26%)",
             },
           ]
         }
@@ -104,7 +104,7 @@ exports[`ResultModal matches snapshot 1`] = `
                 "fontWeight": "700",
               },
               {
-                "color": "hsl(0, 0%, 79%)",
+                "color": "hsl(221.2, 5%, 90%)",
               },
             ]
           }
@@ -150,7 +150,7 @@ exports[`ResultModal matches snapshot 1`] = `
           onStartShouldSetResponder={[Function]}
           style={
             {
-              "backgroundColor": "hsl(262, 50%, 55%)",
+              "backgroundColor": "hsl(221.2, 83.2%, 53.3%)",
               "borderBottomLeftRadius": 9999,
               "borderBottomRightRadius": 9999,
               "borderTopLeftRadius": 9999,
@@ -224,7 +224,7 @@ exports[`ResultModal matches snapshot 1`] = `
               "fontWeight": "600",
             },
             {
-              "color": "hsl(262, 50%, 55%)",
+              "color": "hsl(221.2, 83.2%, 53.3%)",
             },
             {
               "marginTop": 16,
@@ -294,7 +294,7 @@ exports[`ResultModal matches snapshot 1`] = `
                       "fontWeight": "600",
                     },
                     {
-                      "color": "hsl(82, 50%, 60%)",
+                      "color": "hsl(41.2, 80%, 60%)",
                     },
                     {
                       "marginBottom": 8,
@@ -348,7 +348,7 @@ exports[`ResultModal matches snapshot 1`] = `
                       "fontWeight": "600",
                     },
                     {
-                      "color": "hsl(82, 50%, 60%)",
+                      "color": "hsl(41.2, 80%, 60%)",
                     },
                     {
                       "marginBottom": 8,

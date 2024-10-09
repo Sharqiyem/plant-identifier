@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { render } from '@testing-library/react-native';
 import { InfoSection } from '@/components/home/InfoSection';
+import { render } from '@testing-library/react-native';
+import * as React from 'react';
 
 describe('InfoSection', () => {
   it(`renders correctly`, () => {
