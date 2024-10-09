@@ -1,6 +1,6 @@
-import React from 'react';
-import { View, Text, Platform } from 'react-native';
 import { BaseTestingComponentProps, Plant } from '@/types';
+import React from 'react';
+import { Platform, Text, View } from 'react-native';
 
 interface PlantCardProps extends BaseTestingComponentProps {
   plant: Plant;
@@ -15,10 +15,10 @@ export const PlantCard: React.FC<PlantCardProps> = ({
 }) => {
   const shadowStyle = Platform.select({
     ios: 'shadow-lg shadow-black/50',
-    android: 'elevation-4'
+    android: 'elevation-md'
   });
   return (
-    <View className={`bg-card py-4 rounded-lg mb-4 ${shadowStyle}`}>
+    <View className={`bg-card py-4 rounded-lg mb-4 elevation-md ${shadowStyle}`}>
       <Text testID="plant-name" className="text-card-foreground text-2xl font-bold mb-2">
         Name: {plant.name}
       </Text>

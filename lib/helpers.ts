@@ -78,8 +78,10 @@ export const hslToRgb = (h: number, s: number, l: number): string => {
   }
   return `rgb(${Math.round(r * 255)}, ${Math.round(g * 255)}, ${Math.round(b * 255)})`;
 };
+
 export const hslStringToRgb = (hslString: string): string => {
-  const match = hslString.match(/hsl\((\d+)\s+(\d+)%\s+(\d+)%\)/);
+  // This regex now allows for decimal places in the hue value
+  const match = hslString.match(/hsl\((\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)%\s+(\d+(?:\.\d+)?)%\)/);
   if (!match) {
     throw new Error('Invalid HSL string format');
   }

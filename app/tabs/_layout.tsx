@@ -1,9 +1,9 @@
-import { Tabs } from 'expo-router';
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import Colors from '@/constants/Colors';
-import { Platform } from 'react-native';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import * as NavigationBar from 'expo-navigation-bar';
+import { Tabs } from 'expo-router';
 import { useEffect } from 'react';
+import { Platform } from 'react-native';
 
 async function setAndroidNavigationBar() {
   if (Platform.OS !== 'android') return;
@@ -29,11 +29,11 @@ export default function TabsLayout() {
           backgroundColor: Colors.primary,
           // You might want to add these for better styling:
           borderTopWidth: 0,
-          elevation: 0, // for Android
+          elevation: 4, // for Android
           shadowOpacity: 0 // for iOS
         },
         tabBarActiveTintColor: Colors.text,
-        tabBarInactiveTintColor: Colors.secondry
+        tabBarInactiveTintColor: Colors.muted
       }}
     >
       <Tabs.Screen

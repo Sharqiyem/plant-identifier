@@ -1,33 +1,44 @@
 /** @type {import('tailwindcss').Config} */
+const RADIUS = {
+  base: 8, // This is equivalent to 0.5rem (8px)
+  lg: 8,
+  md: 6,
+  sm: 4,
+};
+
 module.exports = {
   content: ['./app/**/*.{js,jsx,ts,tsx}', './components/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
+
       colors: {
-        background: 'hsl(262 35% 10%)',
-        foreground: 'hsl(0 0% 80%)',
-        muted: 'hsl(262 20% 25%)',
-        'muted-foreground': 'hsl(262 20% 80%)',
-        popover: 'hsl(262 35% 9%)',
-        'popover-foreground': 'hsl(0 0% 81%)',
-        card: 'hsl(262 35% 11%)',
-        'card-foreground': 'hsl(0 0% 79%)',
-        border: 'hsl(262 20% 20%)',
-        input: 'hsl(262 20% 30%)',
-        primary: 'hsl(262 50% 55%)',
-        'primary-foreground': 'hsl(262 90% 95%)',
-        secondary: 'hsl(292 50% 60%)',
-        'secondary-foreground': 'hsl(242 90% 95%)',
-        accent: 'hsl(82 50% 60%)',
-        'accent-foreground': 'hsl(202 90% 95%)',
-        destructive: 'hsl(352 100% 35%)',
-        'destructive-foreground': 'hsl(352 100% 95%)',
-        ring: 'hsl(262 50% 50%)',
-        danger: 'hsl(0 91% 49%)'
+        background: 'hsl(221.2 50% 10%)',
+        foreground: 'hsl(221.2 5% 90%)',
+        card: 'hsl(221.2 50% 10%)',
+        'card-foreground': 'hsl(221.2 5% 90%)',
+        popover: 'hsl(221.2 50% 5%)',
+        'popover-foreground': 'hsl(221.2 5% 90%)',
+        primary: 'hsl(221.2 83.2% 53.3%)',
+        'primary-foreground': 'hsl(0 0% 100%)',
+        secondary: 'hsl(221.2 30% 53.3%)',
+        'secondary-foreground': 'hsl(0 0% 100%)',
+        muted: 'hsl(183.2 30% 25%)',
+        'muted-foreground': 'hsl(221.2 5% 60%)',
+        accent: 'hsl(41.2 80% 60%)',
+        'accent-foreground': 'hsl(221.2 5% 90%)',
+        destructive: 'hsl(0 100% 30%)',
+        danger: 'hsl(0 100% 30%)',
+        'destructive-foreground': 'hsl(221.2 5% 90%)',
+        border: 'hsl(221.2 30% 26%)',
+        input: 'hsl(221.2 30% 26%)',
+        ring: 'hsl(221.2 83.2% 53.3%)',
+      },
+      borderRadius: {
+        lg: RADIUS.lg + 'px',
+        md: RADIUS.md + 'px',
+        sm: RADIUS.sm + 'px',
+        DEFAULT: RADIUS.base + 'px',
       }
-      // boxShadow: {
-      //   'custom': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
-      // },
     }
   },
   plugins: [

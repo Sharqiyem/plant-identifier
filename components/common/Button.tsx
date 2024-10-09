@@ -1,8 +1,8 @@
-import React from 'react';
-import { TouchableOpacity, Text, TouchableOpacityProps } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { twMerge } from 'tailwind-merge';
 import Colors from '@/constants/Colors';
+import { Ionicons } from '@expo/vector-icons';
+import React from 'react';
+import { Text, TouchableOpacity, TouchableOpacityProps } from 'react-native';
+import { twMerge } from 'tailwind-merge';
 
 interface ButtonProps extends TouchableOpacityProps {
   title: string;
