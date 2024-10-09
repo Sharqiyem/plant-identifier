@@ -32,7 +32,7 @@ exports[`Button renders match with snapshot 1`] = `
   style={
     {
       "alignItems": "center",
-      "backgroundColor": "hsl(262, 50%, 55%)",
+      "backgroundColor": "hsl(221.2, 83.2%, 53.3%)",
       "borderBottomLeftRadius": 8,
       "borderBottomRightRadius": 8,
       "borderTopLeftRadius": 8,
@@ -58,7 +58,7 @@ exports[`Button renders match with snapshot 1`] = `
     style={
       [
         {
-          "color": "hsl(0, 0%, 80%)",
+          "color": "hsl(221.2, 5%, 90%)",
         },
         {
           "fontWeight": "700",
