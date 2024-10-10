@@ -1,21 +1,16 @@
-import { ResultModal } from '@/components/common/ResultModal';
 import HistoryItem from '@/components/history/HistoryItem';
 import HistoryItemSkeleton from '@/components/history/HistoryItemSkeleton';
 import Colors from '@/constants/Colors';
 import { useHistoryStore } from '@/store/useHistoryStore';
-import { useLanguageStore } from '@/store/useLanguageStore';
 import { ScanHistoryItem } from '@/types';
 import { Ionicons } from '@expo/vector-icons';
 import { Stack } from 'expo-router';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { Alert, Pressable, View } from 'react-native';
 import Animated, { FadeIn, Layout } from 'react-native-reanimated';
 
 const History = () => {
   const { history, loadHistory, clearHistory, removeHistoryItem, loading } = useHistoryStore();
-  const [selectedItem, setSelectedItem] = useState<ScanHistoryItem | null>(null);
-  const [modalVisible, setModalVisible] = useState(false);
-  const { selectedLanguages } = useLanguageStore();
 
   useEffect(() => {
     loadHistory();
@@ -32,11 +27,6 @@ const History = () => {
       }
     ]);
   };
-
-  const handleItemPress = useCallback((item: ScanHistoryItem) => {
-    setSelectedItem(item);
-    setModalVisible(true);
-  }, []);
 
   const handleDeleteItem = useCallback(
     (index: number) => {
@@ -58,17 +48,11 @@ const History = () => {
         {loading ? (
           <HistoryItemSkeleton />
         ) : (
-          <HistoryItem
-            item={item}
-            index={index}
-            onDelete={handleDeleteItem}
-            onPress={handleItemPress}
-            isLoading={loading}
-          />
+          <HistoryItem item={item} index={index} onDelete={handleDeleteItem} isLoading={loading} />
         )}
       </Animated.View>
     ),
-    [handleDeleteItem, handleItemPress, loading]
+    [handleDeleteItem, loading]
   );
 
   return (
@@ -97,14 +81,6 @@ const History = () => {
           scrollEventThrottle={16}
         />
       </View>
-      {selectedItem && (
-        <ResultModal
-          visible={modalVisible}
-          onClose={() => setModalVisible(false)}
-          plantInfo={selectedItem}
-          languages={selectedLanguages}
-        />
-      )}
     </View>
   );
 };

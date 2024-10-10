@@ -55,37 +55,39 @@ export const parseGeminiResponse = (
   languages: Language[]
 ): { [key: string]: Plant } => {
   try {
-    // Remove Markdown code block syntax if present
     const cleanedResponse = response.replace(/```json\n?|\n?```/g, '').trim();
+    let parsedResponse;
+    try {
+      parsedResponse = JSON.parse(cleanedResponse);
+    } catch {
+      throw new Error('Failed to parse plant identification results: Invalid JSON');
+    }
 
-    // Try to parse the cleaned response as JSON
-    const parsedResponse = JSON.parse(cleanedResponse);
-
-    // Validate the structure of the parsed response
     const validatedResponse: { [key: string]: Plant } = {};
 
     languages.forEach((lang) => {
-      if (parsedResponse[lang.languageCode]) {
-        const plantInfo = parsedResponse[lang.languageCode];
-        if (
-          typeof plantInfo.name === 'string' &&
-          typeof plantInfo.scientificName === 'string' &&
-          typeof plantInfo.family === 'string' &&
-          typeof plantInfo.description === 'string'
-        ) {
-          validatedResponse[lang.languageCode] = plantInfo as Plant;
-        } else {
-          throw new Error(`Invalid plant information structure for language: ${lang.languageCode}`);
-        }
-      } else {
+      if (!parsedResponse[lang.languageCode]) {
         throw new Error(`Missing plant information for language: ${lang.languageCode}`);
       }
+
+      const plantInfo = parsedResponse[lang.languageCode];
+      if (
+        typeof plantInfo.name !== 'string' ||
+        typeof plantInfo.scientificName !== 'string' ||
+        typeof plantInfo.family !== 'string' ||
+        typeof plantInfo.description !== 'string'
+      ) {
+        throw new Error(`Invalid plant information structure for language: ${lang.languageCode}`);
+      }
+
+      validatedResponse[lang.languageCode] = plantInfo as Plant;
     });
 
-    // console.log("🚀 ~ parseGeminiResponse ~ validatedResponse:", validatedResponse)
     return validatedResponse;
   } catch (error) {
-    console.error('Error parsing Gemini response:', error);
-    throw new Error('Failed to parse plant identification results.');
+    if (error instanceof Error) {
+      throw error; // Re-throw the specific error
+    }
+    throw new Error('Failed to parse plant identification results: Unknown error');
   }
 };

@@ -1,12 +1,13 @@
 import Colors from '@/constants/Colors';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { Theme, ThemeProvider } from '@react-navigation/native';
 import * as Font from 'expo-font';
-import { Slot } from 'expo-router';
+import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useCallback, useEffect, useState } from 'react';
-import { LogBox } from 'react-native';
+import { LogBox, View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import Animated from 'react-native-reanimated';
 
@@ -29,7 +30,7 @@ export default function RootLayout() {
         await Font.loadAsync(Ionicons.font);
         // Artificially delay for two seconds to simulate a slow loading
         // experience. Please remove this if you copy and paste the code!
-        await new Promise((resolve) => setTimeout(resolve, 2000));
+        await new Promise((resolve) => setTimeout(resolve, 100));
       } catch (e) {
         console.warn(e);
       } finally {
@@ -53,17 +54,33 @@ export default function RootLayout() {
   }, [appIsReady]);
 
   if (!appIsReady) {
-    return null;
+    return <View className="flex-1 bg-background" />;
   }
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }} onLayout={onLayoutRootView}>
-      <Animated.View style={{ flex: 1 }}>
-        <ThemeProvider value={AppTheme}>
-          <StatusBar backgroundColor={Colors.primary} style="light" />
-          <Slot />
-        </ThemeProvider>
-      </Animated.View>
+    <GestureHandlerRootView
+      style={{ flex: 1 }}
+      className="bg-background"
+      onLayout={onLayoutRootView}
+    >
+      <BottomSheetModalProvider>
+        <Animated.View style={{ flex: 1 }}>
+          <ThemeProvider value={AppTheme}>
+            <StatusBar backgroundColor={Colors.primary} style="light" />
+            <Stack>
+              <Stack.Screen name="tabs" options={{ headerShown: false }} />
+              <Stack.Screen
+                name="result-modal"
+                options={{
+                  headerShown: false,
+                  presentation: 'transparentModal',
+                  animation: 'fade'
+                }}
+              />
+            </Stack>
+          </ThemeProvider>
+        </Animated.View>
+      </BottomSheetModalProvider>
     </GestureHandlerRootView>
   );
 }

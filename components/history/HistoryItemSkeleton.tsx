@@ -42,7 +42,7 @@ const HistoryItemSkeleton = () => {
         // style={[{ width: SCREEN_WIDTH - 32 }]}
       >
         <Animated.View className="w-full h-40  " style={animatedBackground} />
-        <View className="p-4 bg-border/90 ">
+        <View className="px-2 bg-border/90 ">
           <Animated.View className="h-6 w-3/4 mb-2 rounded" style={animatedBackground} />
           <Animated.View className="h-4 w-1/2 mb-2 rounded" style={animatedBackground} />
           <Animated.View className="h-4 w-1/4 rounded" style={animatedBackground} />

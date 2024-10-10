@@ -1,12 +1,7 @@
-import React from 'react';
-import { render, fireEvent } from '@testing-library/react-native';
 import { ResultModal } from '@/components/common/ResultModal'; // Adjust the import path as needed
 import { PlantWithMeta } from '@/types';
-
-// Mock the dependencies
-jest.mock('@react-native-picker/picker', () => ({
-  Picker: 'Picker'
-}));
+import { fireEvent, render } from '@testing-library/react-native';
+import React from 'react';
 
 jest.mock('@expo/vector-icons', () => ({
   Ionicons: 'Ionicons'

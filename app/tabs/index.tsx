@@ -5,11 +5,10 @@ import { InfoSection } from '@/components/home/InfoSection';
 import Colors from '@/constants/Colors';
 import { identifyPlant } from '@/lib/api';
 import { pickImage } from '@/lib/image';
-import { saveScanToHistory } from '@/lib/storage';
 import { useHistoryStore } from '@/store/useHistoryStore';
 import { useLanguageStore } from '@/store/useLanguageStore';
 import { PlantWithMeta } from '@/types';
-import { useFocusEffect } from 'expo-router';
+import { useFocusEffect, useRouter } from 'expo-router';
 import React, { useCallback, useState } from 'react';
 import { ActivityIndicator, Image, Text, TouchableOpacity, View } from 'react-native';
 import Animated, { FadeIn, SlideInDown, SlideInUp } from 'react-native-reanimated';
@@ -26,6 +25,8 @@ const Home: React.FC = () => {
     null
   );
   const { addHistoryItem } = useHistoryStore();
+  const router = useRouter();
+
   console.log('🚀 ~ selectedLanguages:', selectedLanguages);
 
   useFocusEffect(
@@ -66,7 +67,6 @@ const Home: React.FC = () => {
       setIdentifiedPlant(plantDataWithMeta);
 
       try {
-        await saveScanToHistory(plantDataWithMeta, previewUri);
         addHistoryItem(plantDataWithMeta);
       } catch (saveError) {
         console.error('Error saving scan to history:', saveError);
@@ -85,6 +85,16 @@ const Home: React.FC = () => {
       setIdentifiedPlant(null);
       identifyPlantFromImage(imageBase64, resizedImageUri);
     }
+  };
+
+  const openResultModal = () => {
+    router.push({
+      pathname: '/result-modal',
+      params: {
+        plantInfo: JSON.stringify(identifiedPlant),
+        languages: JSON.stringify(selectedLanguages)
+      }
+    });
   };
 
   return (
@@ -145,8 +155,12 @@ const Home: React.FC = () => {
 
       {identifiedPlant && !loading && (
         <Animated.View entering={FadeIn.delay(300)} className="mt-4">
-          <TouchableOpacity onPress={() => setModalVisible(true)} className="pb-8">
-            <PlantCard accessibilityLabel="PlantCard" plant={Object.values(identifiedPlant)[0]} />
+          <TouchableOpacity onPress={openResultModal} className="pb-8">
+            <PlantCard
+              className="px-3"
+              accessibilityLabel="PlantCard"
+              plant={Object.values(identifiedPlant)[0]}
+            />
             <Text
               accessibilityLabel="ViewAllResults"
               className="text-center text-primary mt-2 underline"

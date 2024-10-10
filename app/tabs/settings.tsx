@@ -61,7 +61,7 @@ export default function Settings() {
       >
         Select Languages
       </Text>
-      <ScrollView className="flex-1">
+      <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
         {availableLanguages.map((language) => (
           <TouchableOpacity
             key={language.languageCode}

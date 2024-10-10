@@ -1,6 +1,7 @@
 import { BaseTestingComponentProps, Plant } from '@/types';
 import React from 'react';
 import { Platform, Text, View } from 'react-native';
+import { twMerge } from 'tailwind-merge';
 
 interface PlantCardProps extends BaseTestingComponentProps {
   plant: Plant;
@@ -11,14 +12,22 @@ interface PlantCardProps extends BaseTestingComponentProps {
 export const PlantCard: React.FC<PlantCardProps> = ({
   plant,
   showTimestamp = false,
-  timestamp
+  timestamp,
+  ...props
 }) => {
+  const { className } = props;
   const shadowStyle = Platform.select({
-    ios: 'shadow-lg shadow-black/50',
+    ios: 'shadow-md shadow-black/50',
     android: 'elevation-md'
   });
   return (
-    <View className={`bg-card py-4 rounded-lg mb-4 elevation-md ${shadowStyle}`}>
+    <View
+      className={twMerge(
+        `bg-card py-4 rounded-b-lg  mb-4 elevation-md px-2 ${shadowStyle} `,
+        className
+      )}
+      {...props}
+    >
       <Text testID="plant-name" className="text-card-foreground text-2xl font-bold mb-2">
         Name: {plant.name}
       </Text>
@@ -39,22 +48,3 @@ export const PlantCard: React.FC<PlantCardProps> = ({
     </View>
   );
 };
-
-// import React from 'react';
-// import { View, Text, Platform } from 'react-native';
-// import { Plant } from '@/types';
-
-// export const PlantCard = () => {
-//   return (
-//     <View className="p-4 bg-card rounded-lg shadow-md">
-//       <View className="flex-row items-center justify-center mb-3">
-//         {/* <Ionicons name="information-circle-outline" color={Colors.primary} size={24} /> */}
-//         <Text className="ml-2 text-lg font-semibold text-primary">How to Use</Text>
-//       </View>
-//       <Text className="text-center text-base text-foreground leading-6">
-//         To identify plants, select an image from your gallery or take a photo using the camera. Our
-//         AI will analyze the image and provide detailed information about the plant.
-//       </Text>
-//     </View>
-//   );
-// };

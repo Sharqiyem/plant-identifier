@@ -20,7 +20,7 @@ module.exports = {
         'popover-foreground': 'hsl(221.2 5% 90%)',
         primary: 'hsl(221.2 83.2% 53.3%)',
         'primary-foreground': 'hsl(0 0% 100%)',
-        secondary: 'hsl(221.2 30% 53.3%)',
+        secondary: 'hsl(11.2 83.2% 53.3%)',
         'secondary-foreground': 'hsl(0 0% 100%)',
         muted: 'hsl(183.2 30% 25%)',
         'muted-foreground': 'hsl(221.2 5% 60%)',
