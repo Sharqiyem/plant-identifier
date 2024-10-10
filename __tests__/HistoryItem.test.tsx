@@ -44,7 +44,6 @@ describe('HistoryItem', () => {
   };
 
   const mockOnDelete = jest.fn();
-  const mockOnPress = jest.fn();
 
   const defaultProps = {
     item: mockItem,
