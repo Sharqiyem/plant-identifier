@@ -180,7 +180,7 @@ const HistoryItem = React.memo(
           exiting={SlideOutDown.duration(500)}
           style={{ width: SCREEN_WIDTH, marginBottom: 16 }}
         >
-          <View testID="history-item-gesture">
+          <View testID="history-item-touchable">
             <GestureDetector gesture={composedGestures}>
               <Animated.View
                 className="bg-red-500"
@@ -194,7 +194,7 @@ const HistoryItem = React.memo(
                   className="bg-card rounded-lg overflow-hidden"
                 >
                   <AnimatedTouchableOpacity
-                    testID="history-item-touchable"
+                    // testID="history-item-touchable"
                     animatedProps={animatedCardProps as any}
                     // className="bg-red-500 rounded-lg overflow-hidden"
                     // onPress={() => itemPressHandler(item)} // relay solely on the gesture

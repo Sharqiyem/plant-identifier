@@ -14,8 +14,6 @@ exports[`PlantCard renders match with snapshot 1`] = `
       {
         "borderBottomLeftRadius": 8,
         "borderBottomRightRadius": 8,
-        "borderTopLeftRadius": 8,
-        "borderTopRightRadius": 8,
       },
       {
         "marginBottom": 16,
@@ -24,22 +22,26 @@ exports[`PlantCard renders match with snapshot 1`] = `
         "elevation": 6,
       },
       {
-        "shadowColor": "rgba(0, 0, 0, 0.1)",
-        "shadowOffset": {
-          "height": 10,
-          "width": 0,
-        },
-        "shadowOpacity": 1,
-        "shadowRadius": 15,
+        "paddingLeft": 8,
+        "paddingRight": 8,
       },
       {
         "shadowColor": "rgba(0, 0, 0, 0.1)",
         "shadowOffset": {
-          "height": 10,
+          "height": 6,
           "width": 0,
         },
         "shadowOpacity": 1,
-        "shadowRadius": 15,
+        "shadowRadius": 10,
+      },
+      {
+        "shadowColor": "rgba(0, 0, 0, 0.1)",
+        "shadowOffset": {
+          "height": 6,
+          "width": 0,
+        },
+        "shadowOpacity": 1,
+        "shadowRadius": 10,
       },
       {
         "shadowColor": "rgba(0, 0, 0, 0.5)",

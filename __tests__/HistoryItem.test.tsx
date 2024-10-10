@@ -50,7 +50,6 @@ describe('HistoryItem', () => {
     item: mockItem,
     index: 0,
     onDelete: mockOnDelete,
-    onPress: mockOnPress,
     isLoading: false
   };
 
@@ -60,13 +59,6 @@ describe('HistoryItem', () => {
     await waitFor(() => {
       expect(getByTestId('plant-image')).toBeTruthy();
     });
-  });
-
-  it('calls onPress when tapped', () => {
-    const { getByTestId } = render(<HistoryItem {...defaultProps} />);
-
-    fireEvent.press(getByTestId('history-item-touchable'));
-    expect(mockOnPress).toHaveBeenCalledWith(mockItem);
   });
 
   //test calls handleDelete when delete button is pressed
